@@ -1,0 +1,23 @@
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": "{{product.title}}",
+    "image": [
+      "https://mydunlop.com.ua{{product.image_url}}"
+     ],
+    "description": "{{product.short_description|safe}}",
+    "brand": {
+      "@type": "Brand",
+      "name": "Dunlop"
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": "https://mydunlop.com.ua{{product.get_absolute_url}}",
+      "priceCurrency": "UAH",
+      "price": "{{product.price|floatformat:2}}",
+      "availability": "{% if product.quantity > 0 %}https://schema.org/InStock"{% else %}https://schema.org/OutOfStock"{% endif %},
+      "itemCondition": "https://schema.org/NewCondition"
+      }
+    }
+  </script>

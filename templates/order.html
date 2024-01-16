@@ -1,0 +1,459 @@
+{% extends '_base.html' %} {% block styles %}
+<link rel="stylesheet" href="/static/source/pages/order/index.css" />
+{% include 'includes/merch/datalayer_begin_checkout.html' %} {% endblock styles %} {% block content %}
+<section class="order">
+  <div class="modal_loading__block">
+    <img src="/static/source/img/loader2.gif" alt="loading..." />
+  </div>
+
+  <div class="modal_accept__block">
+    <div class="modal_accept_svg">
+      <svg
+        color="green"
+        aria-hidden="true"
+        focusable="false"
+        data-prefix="fas"
+        data-icon="check"
+        role="img"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 512 512"
+        class="svg-inline--fa fa-check fa-w-16 fa-3x"
+      >
+        <path
+          fill="currentColor"
+          d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+          class=""
+        ></path>
+      </svg>
+    </div>
+
+    <div class="modal_accept_text bold_title bold_title_2 color_green">
+      Все пройшло успішно
+    </div>
+  </div>
+
+  <div class="modal_bad__block">
+    <div class="modal_bad_svg">
+      <svg
+        color="red"
+        aria-hidden="true"
+        focusable="false"
+        data-prefix="fas"
+        data-icon="times"
+        role="img"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 352 512"
+        class="svg-inline--fa fa-times fa-w-11 fa-3x"
+      >
+        <path
+          fill="currentColor"
+          d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+          class=""
+        ></path>
+      </svg>
+    </div>
+
+    <div class="modal_bad_text bold_title bold_title_2 color_red">
+      Щось пішло не так, спробуйте пізніше
+    </div>
+  </div>
+
+  <div class="overlay thank-you-pop-up-overlay">
+    <div class="modal__block thank-you-pop-up">
+      <button class="modal_close thank-you-pop-up__close-btn">
+        <img src="/static/source/img/x-mark.svg" alt="x-mark" />
+      </button>
+      <img
+        src="/static/source/img/order/FieldPRO Yellow_96dpi_1181x1181px_X_NR-2485 2.png"
+        alt="product"
+      />
+      <div class="thank-you-pop-up__info">
+        <h3 class="title thank-you-pop-up__title">Дякуємо за покупку</h3>
+        <p class="thank-you-pop-up__description">
+          Ваше замовлення відправлено.
+        </p>
+      </div>
+      <a class="btn_3 thank-you-pop-up__go-shopping-btn" href="/">
+        Повернутися до покупок
+      </a>
+    </div>
+  </div>
+  <button class="go-back-btn open-cart-btn">Вернутися до кошика</button>
+  <div class="order__center order-form validation__block">
+    <div class="order__left-block">
+      <h2 class="title order__title">Оформлення замовлення</h2>
+      <form class="form order__form">
+        <div class="form__part form__part-contacts">
+          <h4 class="form__part-title">1. Ваші контактні дані</h4>
+          <div class="form__part-center">
+            <div class="form__inputs-wrapper">
+              <div
+                class="form__field form__contacts-field validation_container"
+              >
+                <input
+                  class="validation_input"
+                  id="lastName"
+                  data-type="name"
+                  name="lastName"
+                  type="text"
+                  readonly
+                  required
+                />
+                <label for="lastName">Прізвище</label>
+              </div>
+
+              <div
+                class="form__field form__contacts-field validation_container"
+              >
+                <input
+                  class="validation_input"
+                  id="firstName"
+                  data-type="name"
+                  name="firstName"
+                  type="text"
+                  readonly
+                  required
+                />
+                <label for="firstName">Ім’я</label>
+              </div>
+            </div>
+
+            <div class="form__field form__contacts-field validation_container">
+              <input
+                class="validation_input"
+                id="tel"
+                data-type="phone"
+                name="tel"
+                type="tel"
+                readonly
+              />
+              <label for="tel">Мобільний телефон</label>
+              <span class="badge form__contacts-field-tooltip">?</span>
+            </div>
+
+            <div class="form__field form__contacts-field validation_container">
+              <input
+                class="validation_input"
+                id="email"
+                data-type="email"
+                name="email"
+                type="email"
+                readonly
+                required
+              />
+              <label for="email">Email</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form__part form__part-delivery">
+          <h4 class="form__part-title">2. Доставка</h4>
+          <div class="form__part-center">
+            <div class="form__checkbox form__delivery-checkbox active">
+              <div class="form__checkbox-wrapper">
+                <input
+                  id="self-pickup-nv"
+                  name="delivery"
+                  type="radio"
+                  checked
+                />
+                <label class="form__checkbox-label" for="self-pickup-nv">
+                  <span class="form__checkbox-label-info">
+                    <span class="form__checkbox-label-title">
+                      У відділення Нової Пошти
+                    </span>
+                  </span>
+                </label>
+              </div>
+              <div class="dropdown-block">
+                <div
+                  class="form__field form__delivery-select validation_container"
+                >
+                  <label for="city">Ваше місто</label>
+                  <div class="select custom-select select-city">
+                    <div id="city" class="custom-select__head">
+                      <input
+                        id="city"
+                        data-type="comment"
+                        class="validation_input"
+                        name="city"
+                        type="text"
+                        value=""
+                      />
+                      <span class="form__delivery-select-caret">
+                        <img
+                          src="/static/source/img/order/caret-down.svg"
+                          alt="arrow-down"
+                        />
+                      </span>
+                    </div>
+                    <div class="custom-select__body">
+                      <ul class="custom-select__list"></ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form__field form__delivery-select">
+                  <label for="department">Відділення</label>
+                  <div class="select custom-select select-department">
+                    <div id="department" class="custom-select__head">
+                      <input
+                        id="department"
+                        name="department"
+                        type="text"
+                        value=""
+                      />
+                      <span class="form__delivery-select-caret">
+                        <img
+                          src="/static/source/img/order/caret-down.svg"
+                          alt="arrow-down"
+                        />
+                      </span>
+                    </div>
+                    <div class="custom-select__body">
+                      <ul class="custom-select__list"></ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form__checkbox form__delivery-checkbox">
+              <div class="form__checkbox-wrapper">
+                <input id="courier" name="delivery" type="radio" />
+                <label class="form__checkbox-label" for="courier">
+                  <span class="form__checkbox-label-info">
+                    <span class="form__checkbox-label-title">
+                      Кур'єром на вашу адресу
+                    </span>
+                  </span>
+                </label>
+              </div>
+              <div class="dropdown-block form__field validation_container">
+                <textarea
+                  id="address"
+                  data-type="comment"
+                  name="address"
+                  type="text"
+                ></textarea>
+                <label for="address"
+                  >Адреса (Область, населений пункт, вулиця, номер будинку)</label
+                >
+              </div>
+            </div>
+
+            <div class="form__checkbox form__delivery-checkbox">
+              <div class="form__checkbox-wrapper">
+                <input id="other-method" name="delivery" type="radio" />
+                <label class="form__checkbox-label" for="other-method">
+                  <span class="form__checkbox-label-info">
+                    <span class="form__checkbox-label-title">Інший спосіб</span>
+                  </span>
+                </label>
+              </div>
+
+              <div class="dropdown-block form__field validation_container">
+                <textarea
+                  id="message"
+                  data-type="comment"
+                  name="message"
+                  type="text"
+                ></textarea>
+                <label for="message">Ваше повідомлення</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form__part form__part-payment">
+          <h4 class="form__part-title">3. Оплата</h4>
+          <div class="form__part-center">
+            <div class="form__checkbox form__payment-checkbox">
+              <input id="cash-payment" name="payment" type="radio" checked />
+              <label class="form__checkbox-label" for="cash-payment">
+                <span class="form__checkbox-label-info">
+                  <span class="form__checkbox-label-title"
+                    >Оплата під час отримання товару</span
+                  >
+                </span>
+              </label>
+            </div>
+
+            <div class="form__checkbox form__payment-checkbox">
+              <input id="pay-now" name="payment" type="radio" />
+              <label class="form__checkbox-label" for="pay-now">
+                <span class="form__checkbox-label-info">
+                  <span class="form__checkbox-label-title">Оплатити зараз</span>
+                </span>
+              </label>
+            </div>
+
+            <div class="form__checkbox form__payment-checkbox">
+              <input
+                id="cashless-payment-legal-entity"
+                name="payment"
+                type="radio"
+              />
+              <label
+                class="form__checkbox-label"
+                for="cashless-payment-legal-entity"
+              >
+                <span class="form__checkbox-label-info">
+                  <span class="form__checkbox-label-title"
+                    >Безготівковими для юридичних осіб</span
+                  >
+                  <span class="form__checkbox-label-description"
+                    >Оплата для юридичних осіб через розрахунковий рахунок</span
+                  >
+                </span>
+              </label>
+            </div>
+
+            <div class="form__checkbox form__payment-checkbox">
+              <input
+                id="cashless-payment-individual"
+                name="payment"
+                type="radio"
+              />
+              <label
+                class="form__checkbox-label"
+                for="cashless-payment-individual"
+              >
+                <span class="form__checkbox-label-info">
+                  <span class="form__checkbox-label-title"
+                    >Безготівковий для фізичних осіб</span
+                  >
+                  <span class="form__checkbox-label-description"
+                    >Оплата для фізичних осіб через розрахунковий рахунок</span
+                  >
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="summary order__summary">
+      <div class="summary__top">
+        <h3 class="title summary__title">Разом</h3>
+      </div>
+      <div class="summary__center">
+        <div class="summary__items">
+          {% for cart_product in cart_products %}
+          <div class="summary__item">
+            <div class="summary__item-img">
+              <img
+                src="{{cart_product.product.image_url}}"
+                alt="{{cart_product.product.title}}"
+              />
+              <span class="badge summary__item-badge"
+                >{{cart_product.quantity}}</span
+              >
+            </div>
+
+            <div class="summary__item-info">
+              <div class="summary__item-info-left">
+                <h4 class="title summary__item-title">
+                  {{cart_product.product.title}}
+                </h4>
+                <div class="summary__item-params">
+                  <p>Колір:<span>{{cart_product.product_color.title}}</span></p>
+                  <p>Розмір:<span>{{cart_product.product_size.title}}</span></p>
+                </div>
+                <p class="summary__item-count">
+                  {{cart_product.quantity}} {% if cart_product.quantity == 1%}пара{% else %}пари{% endif %}
+                </p>
+              </div>
+
+              <div class="summary__item-info-right">
+                <p class="summary__item-price">
+                  <span
+                    >{{cart_product.get_total_price|stringformat:'.2f'}}</span
+                  >₴
+                </p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <div class="summary__cost">
+          <div class="summary__money-lines">
+            <div class="summary__subtotal">
+              <span class="summary__subtotal-title">
+                <span
+                  >{{cart.get_cart_product_total_quantity}} 
+                  {% if cart.get_cart_product_total_quantity == 1 %} товар {% else %}товари{% endif %} </span
+                >на суму</span
+              >
+              <span class="summary__subtotal-price">
+                <span>{{cart.get_total_price|stringformat:'.2f'}}</span>₴
+              </span>
+            </div>
+
+            <div class="summary__subtotal">
+              <span class="summary__subtotal-title"> Вартість доставки </span>
+              <span class="summary__subtotal-price">
+                за тарифами перевізника
+              </span>
+            </div>
+          </div>
+
+          <div class="summary__total-cost">
+            <span class="title summary__total-cost-title">До сплати:</span>
+            <span
+              ><span class="summary__total-cost-number"
+                >{{cart.get_total_price|stringformat:'.2f'}}</span
+              >₴</span
+            >
+          </div>
+        </div>
+
+        <!-- якщо кнопка disabled, то вона червона і не реагує на жодні дії -->
+        <div class="g-recaptcha-wrapper">
+          <div class="g-recaptcha" data-sitekey="6LfEYW0mAAAAAIIft2CrRWp0ew29N26Qr2VaBy9w"></div>
+        <div class="g-recaptcha-error">Потрібна перевірка Recaptcha.</div>
+        </div>
+        <button
+          class="summary__confirm-btn btn_3 validation_btn"
+          type="submit"
+        >
+          Замовлення підтверджую
+        </button>
+        <div class="summary__conditions">
+          <p class="summary__conditions-text">
+            Підтверджуючи замовлення, я приймаю умови:
+          </p>
+          <ul class="summary__conditions-list">
+            <li>
+              <a href="{% url 'delivery' %}"
+                >положення про обробку і захист персональних даних</a
+              >
+            </li>
+            <li><a href="{% url 'delivery' %}">угоди користувача</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="order__copyright">© 2001–2023 Інтернет-магазин</p>
+</section>
+{%endblock content%} {%block scripts%}
+
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback"></script>
+<script src="/static/source/pages/order/index.js"></script>
+<script>
+  function onloadCallback() {
+    setInterval(()=> {
+      const reCaptchaContainer = document.querySelector(".g-recaptcha-wrapper");
+      const res = grecaptcha.getResponse();
+
+      if(reCaptchaContainer && res){
+        reCaptchaContainer.dataset.res = res;
+      }
+    }, 500)
+  }
+  </script>
+
+{% endblock scripts %}

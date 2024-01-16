@@ -1,0 +1,296 @@
+.summary {
+  p {
+    margin: 0;
+  }
+
+  &__top {
+    background-color: #ebebeb;
+    padding: 16px 0 16px 24px;
+  }
+
+  &__center {
+    padding: 58px;
+    box-shadow: 0px 10px 50px -5px rgba(48, 70, 109, 0.15);
+    overflow: hidden;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 39px;
+
+    &-img {
+      width: 62px;
+      height: 62px;
+      position: relative;
+      border: 1px solid #d9d9d9;
+
+      img {
+        width: 60px;
+        height: 60px;
+      }
+    }
+
+    &-badge {
+      position: absolute;
+      top: -9.5px;
+      right: -5.5px;
+    }
+
+    &-info {
+      display: flex;
+      margin-left: 15px;
+
+      &-left {
+        max-width: 226px;
+        width: 100%;
+      }
+
+      &-right {
+        margin-left: 15px;
+      }
+    }
+
+    &-title {
+      color: #272c35;
+      font-size: 18px;
+      line-height: 27px;
+    }
+
+    &-params {
+      margin: 8px 0;
+      color: #272c35;
+      font-size: 15px;
+      line-height: 130%;
+
+      p {
+        line-height: 130%;
+
+        span {
+          margin-left: 4px;
+        }
+      }
+
+      p + p {
+        margin-top: 4px;
+      }
+    }
+
+    &-count {
+      color: #737373;
+      font-size: 12px;
+      line-height: 16px;
+    }
+
+    &-price {
+      text-transform: uppercase;
+      color: #333;
+      line-height: 20.8px;
+
+      span {
+        margin-right: 4px;
+        color: #000;
+        font-size: 24px;
+        line-height: 36px;
+        font-weight: 700;
+      }
+    }
+  }
+
+  &__money-lines {
+    padding: 39px 0 21px;
+    border-top: 1px solid #d9d9d9;
+    border-bottom: 1px solid #d9d9d9;
+  }
+
+  &__subtotal {
+    display: flex;
+    justify-content: space-between;
+    color: #545454;
+    font-size: 15px;
+    line-height: 130%;
+
+    &-title {
+      span {
+        margin-right: 4px;
+      }
+    }
+
+    &-price {
+      margin-left: 8px;
+      text-align: end;
+    }
+  }
+
+  &__subtotal:first-child {
+    margin-bottom: 12px;
+
+    .summary__subtotal-price {
+      color: #333333;
+      font-size: 14px;
+      line-height: 16px;
+      font-weight: 700;
+
+      span {
+        margin-right: 4px;
+      }
+    }
+  }
+
+  &__total-cost {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 700;
+    margin: 21px 0 27px;
+
+    &-title {
+      color: #272c35;
+      font-size: 18px;
+      line-height: 27px;
+      margin-right: 8px;
+    }
+
+    // Total price
+    // Currency symbol (₴)
+    span {
+      color: #333;
+      line-height: 20.8px;
+
+      // numerical value
+      span {
+        color: #000;
+        font-size: 24px;
+        line-height: 36px;
+        margin-right: 4px;
+      }
+    }
+  }
+
+  &__confirm-btn {
+    width: 100%;
+    padding: 22px;
+    line-height: 27px;
+
+    &:disabled {
+      background-color: #f0493e;
+    }
+  }
+
+  &__conditions {
+    margin-top: 27px;
+    color: #5b626f;
+    font-size: 15px;
+    line-height: 130%;
+
+    &-list {
+      padding-left: 26px;
+
+      a {
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    &__center {
+      padding: 40px;
+    }
+
+    &__item {
+      &-img {
+        width: 100px;
+        height: 100px;
+
+        img {
+          width: 98px;
+          height: 98px;
+        }
+      }
+
+      &-info {
+        flex-direction: column;
+
+        &-left {
+          max-width: 100%;
+        }
+
+        &-right {
+          align-self: flex-end;
+        }
+      }
+
+      &-price {
+        margin-top: 12px !important;
+        text-align: end;
+        line-height: 18px;
+
+        span {
+          font-size: 18px;
+          line-height: 22px;
+          overflow-wrap: anywhere;
+        }
+      }
+    }
+
+    &__subtotal:first-child &__subtotal-price {
+      span {
+        overflow-wrap: anywhere;
+      }
+    }
+
+    &__total-cost {
+      &-title {
+        font-size: 14px;
+        text-align: start !important;
+      }
+
+      // Total price
+      // Currency symbol (₴)
+      span {
+        text-align: end;
+        line-height: 18px;
+
+        // numerical value
+        span {
+          font-size: 18px;
+          line-height: 22px;
+          overflow-wrap: anywhere;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 450px) {
+    &__center {
+      padding: 25px;
+    }
+
+    &__item {
+      &-img {
+        width: 72px;
+        height: 72px;
+        img {
+          width: 70px;
+          height: 70px;
+        }
+      }
+
+      &-title {
+        font-size: 16px;
+      }
+
+      &-params {
+        font-size: 14px;
+      }
+    }
+
+    &__confirm-btn {
+      padding: 15px;
+      font-size: 16px;
+      line-height: 20px;
+    }
+  }
+}

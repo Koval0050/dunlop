@@ -1,0 +1,10 @@
+node_modules
+/media/*
+/venv/*
+*.vscode/*
+*.env
+*.sqlite3
+*.pyc
+*.log
+/project/*.xml
+.idea

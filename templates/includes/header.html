@@ -1,0 +1,114 @@
+<header class="header header-new">
+    <div class="header_hamburger" id="hamburger">
+        <div class="header_line header_line_1"></div>
+        <div class="header_line header_line_2"></div>
+        <div class="header_line header_line_3"></div>
+    </div>
+    <div class="header-new__container">
+        <div class="header-new__logo">
+            <a href="/">
+                <img src="/static/source/img/common/IMAGE.svg" alt="Dunlop logo" />
+            </a>
+        </div>
+        <nav class="header-new__nav">
+            <div class="header-new__nav-left">
+                <a href="{% url 'index' %}#product">Продукція</a>
+                <a href="{% url 'index' %}#about">Про нас</a>
+            </div>
+
+            <div class="header-new__nav-right">
+                <div class="header-new__nav-contacts">
+                    <a href="{% url 'index' %}#contact">Контакти</a>
+                    <a href="tel:{{site.phone}}">{{site.phone}}</a>
+                </div>
+                <div class="header-new__nav-btns">
+                    <button class="open-cart-btn header-new__cart-btn">
+                        <img src="/static/source/img/header/ic-basket.svg" />
+                        <!-- якщо додано хоч 1 товар в корзину, то додається клас active і відображається мітка на корзині -->
+                        <span class="header-new__cart-mark{% if cart_products %} active{% endif %}"></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <div class="header-new__download-btn">
+            <a href="{{site.file}}" download>
+                <img src="/static/source/img/header/bi_download.svg" alt="download" />
+                Прайс {{site.updated|date:'Y'}}
+            </a>
+        </div>
+    </div>
+
+    <div class="header_mob_nav">
+        <a href="tel:+380670100170" class="color_white">+380 670-100-170</a>
+        <a href="#product" class="color_gray2">Продукція</a>
+        <a href="#about" class="color_gray2">Про нас</a>
+        <a href="#contact_footer" class="color_white">Контакти</a>
+        <a href="{{site.file}}" download>
+            <img src="/static/source/img/header/bi_download.svg" alt="download" />
+            Прайс {{site.updated|date:'Y'}}
+        </a>
+    </div>
+
+    <div class="overlay cart-overlay">
+        <div class="cart">
+            <div class="cart__top">
+                <h3 class="cart__title">Кошик</h3>
+                <button class="close-cart-btn cart__close-btn">
+                    <img src="/static/source/img/x-mark.svg" alt="close" />
+                </button>
+            </div>
+            <div class="cart__items">
+                {% for cart_product in cart.cart_products.all %}
+                <div class="cart__item" data-id="{{cart_product.id}}" data-product-id="{{cart_product.product.id}}"
+                    data-quantity="{{cart_product.product.quantity}}">
+                    <button class="cart__item-remove">
+                        <img src="/static/source/img/x-mark.svg" alt="x-mark" />
+                    </button>
+                    <a href="{{cart_product.product.get_absolute_url}}">
+                        <img src="{{cart_product.product.image_url}}" alt="{{cart_product.product.title}}" />
+                    </a>
+                    <div class="cart__item-info">
+                        <h4 class="cart__item-title" data-title="{{cart_product.product.title}}">{{cart_product.product.title}}</h4>
+                        <div class="cart__item-params">
+                            <p>Колір:<span>{{cart_product.product_color.title}}</span></p>
+                            <p>Розмір:<span>{{cart_product.product_size.title}}</span></p>
+                        </div>
+                        <div class="cart__item-bottom">
+                            <div class="counter">
+                                <button data-id="{{cart_product.id}}" data-href="{% url 'cart_product' %}"
+                                    class="counter__minus-btn">
+                                    -
+                                </button>
+                                <input class="counter__value" type="number" value="{{cart_product.quantity}}" />
+                                <button data-id="{{cart_product.id}}" data-href="{% url 'cart_product' %}"
+                                    class="counter__plus-btn">
+                                    +
+                                </button>
+                            </div>
+                            <p class="cart__item-price">
+                                <span data-price="{{cart_product.get_total_price}}">{{cart_product.get_total_price}}</span>грн
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="cart__bottom">
+                <div class="cart__total-price-info">
+                    <div class="cart__total-price-top">
+                        <span>Загалом:</span>
+                        <span class="cart__total-price-count"><span>{{cart.get_total_price}}</span>грн</span>
+                    </div>
+                    <p class="cart__total-price-text">
+                        Вартість доставки розраховується при оформленні замовлення.
+                    </p>
+                </div>
+                <a href="{% url 'order' %}">
+                    <button data-href="{% url 'order' %}" class="btn_3 cart__place-order-btn">
+                        Оформити замовлення
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</header>

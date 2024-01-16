@@ -1,0 +1,16 @@
+.validation {
+    &_container {
+        position: relative;
+    }
+    &_error {
+        position: absolute;
+        bottom: -20px;
+        left: 0;
+        width: 100%;
+        font-weight: 800;
+        font-stretch: normal;
+        font-style: normal;
+        font-size: 12px;
+        color: red;
+    }
+}

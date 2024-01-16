@@ -1,0 +1,18 @@
+.bread-crumbs {
+    @media (max-width: 1000px) {
+        padding-top: 100px;
+    }
+    padding-top: 50px;
+    a {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 130%;
+        /* identical to box height, or 26px */
+        color: #FFFFFF;
+    }
+    .arrow::after {
+        content: '🠒';
+        margin: 0 10px;
+    }
+}

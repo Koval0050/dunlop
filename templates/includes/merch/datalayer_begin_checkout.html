@@ -1,0 +1,17 @@
+<script>
+  window.dataLayer = window.dataLayer || [];
+  dataLayer.push({
+    'event': 'begin_checkout',
+    'items': [
+      {% for cart_product in cart.cart_products.all %}
+      {
+        'item_name': '{{cart_product.product.title}}',
+        'item_id': '{{cart_product.product.id}}',
+        'item_price': '{{cart_product.get_total_price}}',
+      }{%if not forloop.last%},{%endif%}
+      {% endfor %}
+    ],
+    'value': '{{cart.get_total_price|floatformat:2}}',
+    'currency': 'UAH',
+  });
+</script>

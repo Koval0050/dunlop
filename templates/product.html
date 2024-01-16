@@ -1,0 +1,578 @@
+{% extends '_base.html' %} {% block styles %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="/static/source/pages/product/index.css" />
+{% endblock styles %} {% block meta %}
+<title>{{product.meta_title}}</title>
+<meta content="{{product.meta_description}}" name="description" />
+<meta content="{{product.meta_keys}}" name="keywords" />
+{% include 'includes/merch/datalayer_product.html' %}
+{% endblock meta %} {% block content %}
+
+<section class="product">
+    <div class="modal_loading__block">
+        <img src="/static/source/img/loader2.gif" alt="loading..." />
+    </div>
+
+    <div class="modal_accept__block">
+        <div class="modal_accept_svg">
+            <svg color="green" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-check fa-w-16 fa-3x">
+                <path fill="currentColor"
+                    d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                    class=""></path>
+            </svg>
+        </div>
+
+        <div class="modal_accept_text bold_title bold_title_2 color_green">
+            Все пройшло успішно
+        </div>
+    </div>
+
+    <div class="modal_bad__block">
+        <div class="modal_bad_svg">
+            <svg color="red" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" role="img"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512" class="svg-inline--fa fa-times fa-w-11 fa-3x">
+                <path fill="currentColor"
+                    d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+                    class=""></path>
+            </svg>
+        </div>
+
+        <div class="modal_bad_text bold_title bold_title_2 color_red">
+            Щось пішло не так, спробуйте пізніше
+        </div>
+    </div>
+
+    <div class="overlay">
+        <div class="modal__block quckly_shop">
+            <div class="modal_close">✖</div>
+
+            <form action="{% url 'contact' %}" class="modal_form validation__block quckly_shop_form-product">
+                {% csrf_token %}
+                <div class="input__wrap validation_container input_section">
+                    <input class="modal_input quick_buy__name input validation_input" data-type="name" name="name"
+                        placeholder="Ім’я *" type="text" />
+                </div>
+                <div class="input__wrap validation_container input_section">
+                    <input class="modal_input quick_buy__phone input validation_input" data-type="phone" name="phone"
+                        placeholder="Телефон *" />
+                </div>
+                <div class="input__wrap validation_container input_section">
+                    <input type="email" class="modal_input quick_buy__phone input validation_input" data-type="email"
+                        name="email" placeholder="Email *" />
+                </div>
+
+                <div class="input_section input__wrap validation_container">
+                    <textarea class="quick_buy__massage input validation_input textarea_basic" cols="30"
+                        data-required="false" data-type="comment" id="" name="comment" placeholder="Ваш коментар"
+                        rows="10"></textarea>
+                </div>
+                <div class="">
+                    <input class="form_submit validation_btn btn_1 quick_buy__btn" type="submit" value="Відправити" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="overlay">
+        <div class="modal__block sizes-grid">
+            <button class="modal_close">✖</button>
+            <div>
+                <img src="{{product.sizes_image_url}}" alt="sizes-grid" />
+            </div>
+        </div>
+    </div>
+
+    <div class="overlay">
+        <div class="modal__block checkbox-modal">
+            <button class="modal_close">✖</button>
+            <div>
+                <h3 class="checkbox-modal__title">Товар не додано в корзину</h3>
+                <p class="checkbox-modal__description">
+                    Виберіть колір і розмір товару та повторіть спробу!
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="product__wrapper">
+            <div class="product__left">
+                <div class="product__media-content">
+                    <img src="{{product.image_url}}" />
+                    {% for product_image in product.images.all %}
+                    <img src="{{product_image.image_url}}" />
+                    {% endfor %} {% if product.video_url %}
+                    <iframe src="{{product.get_embeded_link}}" title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+                    {% endif %}
+                </div>
+                <div class="advances-block">
+                    <h5 class="title-2" style="
+              background-image: url(/static/source/img/advances/переваги\ взуття.png);
+            ">
+                        Переваги цієї моделі
+                    </h5>
+                    <div class="advances-block__items">
+                        {% for advantage in product.advantages.all %}
+                        <div class="advances__item">
+                            <img src="{{advantage.image_url}}" alt="{{advantage.title}}" />
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="product__info">
+                <a class="go-back-btn product__go-back-btn" href="{{prev_url}}">Back</a>
+                <div class="product__info-basic">
+                    <h4 class="title product__title">{{product.title}}</h4>
+                    <div class="product__details-basic">
+                        {% if product.quantity %}
+                        <span class="product__availability">В наявності</span>
+                        {% elif not product.quantity %}
+                        <span class="product__availability missing">Немає в наявності</span>
+                        {% endif %}
+                        <!--product__availability має класи-модифікатори -is-delivered та --missing -->
+                    </div>
+
+                    <div class="media-swiper product__media-swiper">
+                        <div class="swiper-wrapper">
+                            <img src="{{product.image_url}}" />
+                            {% for product_image in product.images.all %}
+                            <div class="swiper-slide">
+                                <img src="{{product_image.image_url}}" />
+                            </div>
+                            {% endfor %} {% if product.video_url %}
+                            <div class="swiper-slide">
+                                <iframe src="{{product.video_url}}" title="YouTube video player" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen></iframe>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="advances-block-swiper">
+                        <h5 class="title-2" style="
+                background-image: url(/static/source/img/advances/переваги\ взуття.png);
+              ">
+                            Переваги цієї моделі
+                        </h5>
+                        <div class="advances__items swiper-container">
+                            <div class="swiper-wrapper">
+                                {% for advantage in product.advantages.all %}
+                                <div class="advances__item swiper-slide">
+                                    <img src="{{advantage.image_url}}" alt="{{advantage.title}}" />
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product__price-info">
+                        <p class="product__price">
+                            <span>{{product.price|floatformat:2}}</span>грн.
+                        </p>
+                        <p class="product__text">
+                            Вартість доставки розраховується при оформленні замовлення.
+                        </p>
+                    </div>
+                </div>
+                <div class="product__info-center">
+                    <form class="product__form">
+                        <div class="product__checkbox-items">
+                            <div class="product__checkbox product__checkbox-colors">
+                                {%for color in product.colors.all%} {% if forloop.counter == 1%}
+                                <label class="product__checkbox-label">Колір: <span>{{color.title}}</span>
+                                </label>
+                                {% endif %} {% endfor %}
+                                <div class="product__checkbox-item">
+                                    {% for color in product.colors.all %}
+                                    <!--prettier ignore -->
+                                    <input id="{{color.id}}" name="color" type="radio" data-title="{{color.title}}"
+                                        style="background-color:
+                  {{color.color}}" {% if forloop.counter == 1 %}checked{%endif%} /> {% endfor %}
+                                </div>
+                            </div>
+                            <div class="product__checkbox product__checkbox-sizes">
+                                {% for size in product.sizes.all %} {% if forloop.counter == 1%}
+                                <label class="product__checkbox-label">Розмір: <span>{{size.title}}</span></label>
+                                {% endif %} {% endfor %}
+                                <div class="product__checkbox-item">
+                                    {% for size in product.sizes.all %}
+                                    <div>
+                                        <label for="{{size.id}}">{{size.title}}</label>
+                                        <!-- prettier-ignore -->
+                                        <input id="{{size.id}}" name="size" type="radio" data-title="{{size.title}}"
+                                            {%if forloop.counter == 1 %}checked {% endif %} />
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn_3 product__buy-btn modal_open" data-href="quckly_shop"
+                            data-id="{{product.id}}">
+                            Купити в 1 клік
+                        </button>
+                        <button class="btn_transparent-bordered btn_3 product__add-to-cart-btn" type="button"
+                            data-href="{% url 'cart_product' %}" 
+                            data-id="{{product.id}}" data-title="{{product.title}}" data-price="{{product.price|floatformat:2}}">
+                            Додати в корзину
+                        </button>
+                    </form>
+                    <div class="product__preferences">
+                        <div class="product__testimonials">
+                            <a href="#reviews" class="product__reviews">Відгуки (<span>{{reviews.count}}</span>)</a>
+                            <div class="star-rating product__star-rating">
+                                <div class="star-rating__body">
+                                    <!-- star-rating__active - якщо 80% ,то 4/5 зірок заповнено -->
+                                    <div class="star-rating__active" style="width: {{product.get_rating}}%"></div>
+                                    <div class="star-rating__items">
+                                        <input type="radio" class="star-rating__item" value="1" name="star-rating" />
+                                        <input type="radio" class="star-rating__item" value="2" name="star-rating" />
+
+                                        <input type="radio" class="star-rating__item" value="3" name="star-rating" />
+
+                                        <input type="radio" class="star-rating__item" value="4" name="star-rating" />
+
+                                        <input type="radio" class="star-rating__item" value="5" name="star-rating" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product__details">
+                    <div class="product__details-description">
+                        <!--<p class="product__details-title">
+              Стійкий до різних низькоконцентрованих кислот, лугів і
+              дезінфікуючих засобів.
+            </p> -->
+                        <ul class="product__details-description-items">
+                            {{product.short_description|linebreaks}}
+                        </ul>
+                    </div>
+                    <div class="product__details-link product__details-title product__details-specifications">
+                        <button class="product__details-specifications-head">
+                            Specifications
+                            <img src="/static/source/img/arrow.svg" alt="arrow-right" />
+                        </button>
+                        <div class="product__details-specifications-body">
+                            {% for product_feature in product.product_features.all %}
+                            <p>
+                                <span>{{product_feature.feature.title}}</span>
+                                <span>{{product_feature.feature_value.title|safe}}</span>
+                            </p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <a href="{% url 'delivery' %}" class="product__details-link product__details-title">Інформація про
+                        доставку
+                        <img src="/static/source/img/arrow.svg" alt="arrow-right" />
+                    </a>
+                    {% if product.sizes_image %}
+                    <button class="product__details-link product__details-title modal_open" data-href="sizes-grid">
+                        Cітка розмірів
+                        <img src="/static/source/img/arrow.svg" alt="arrow-right" />
+                    </button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% if product.similars.all %}
+<section id="product">
+    <div class="product container">
+        <div class="product__title">Вас можуть зацікавити</div>
+        <div class="product__slider swiper-container">
+            <div class="swiper-wrapper product_card_container">
+                {% for product in product.similars.all %}
+                <div class="swiper-slide product_card-wrapper">
+                    <div data-id="{{product.id}}" class="product_card">
+                      <div class="product_card__top">
+                        <div class="product_card__img">
+                            <img src="{{product.image_url}}" alt="" />
+                            {% if product.logo %}
+                            <img class="european_badge" src="{{product.logo_url}}" />
+                            {% endif %}
+                        </div>
+                        <div class="product_card__title">{{product.title}}</div>
+                        <div data-url="{{product.get_absolute_url}}" class="product_card__btn absolute_center">
+                            <a href="{{product.get_absolute_url}}">
+                                <button class="btn_1 product_btn_details">ДЕТАЛЬНІШЕ</button>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="product_card__bottom">
+                        <div class="product_card__bottom-left">
+                            <div class="product_card__price">
+                                <span>{{product.price}}</span> грн
+                            </div>
+                            <a class="product_card__manufacturer"> Dunlop
+                                {% if product.article %}{{product.article}}{% endif %}</a>
+                        </div>
+                        <div class="product_card__bottom-btn">
+                            <button class="button-buy modal_open buy_btn" data-href="quckly_shop"
+                                data-id="{{product.id}}">
+                                Купити в 1 клік
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                
+                {% endfor %}
+            </div>
+            <div class="swiper-button-prev product-slider-btn-prev"></div>
+            <div class="swiper-button-next product-slider-btn-next"></div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<section class="innovation innovation__container" id="innovation">
+    <div class="innovation__title">
+        <div class="title-2" style="
+        background-image: url(/static/source/img/innovation/Технологія.png);
+      ">
+            ІННОВАЦІЯ PUROFORT
+        </div>
+        <div class="innovation__title-1">
+            За своїми властивостями цей матеріал є ефективнішим за гуму та базовий
+            поліуретан. На початку 1980-х Dunlop заново винайшов гуму і випустив свої
+            перші чоботи Purofort®. Взуття Purofort® – найкраще в своєму класі
+            поліуретанові чоботи. Понад 10 мільйонів людей у ​​всьому світі носять це
+            унікальне взуття щодня.
+        </div>
+    </div>
+    <div class="innovation__columns">
+        <div class="innovation__column">
+            <div class="innovation_item">
+                <div class="innovation_item__num">01</div>
+                <div class="innovation_item__title">PUROTEX UPPER</div>
+                <div class="innovation_item__description">
+                    Не неопрен, а 4-шаровий матеріал, який на 100% водонепроникний зовні і
+                    пропускає повітря всередині.
+                </div>
+            </div>
+            <div class="innovation_item">
+                <div class="innovation_item__num">02</div>
+                <div class="innovation_item__title">SNUG LAST</div>
+                <div class="innovation_item__description">
+                    Унікальна технологія розроблена для ідеальної посадки стопи та
+                    комфорту.
+                </div>
+            </div>
+            <div class="innovation_item">
+                <div class="innovation_item__num">03</div>
+                <div class="innovation_item__title">PUROFORT® SHAFT</div>
+                <div class="innovation_item__description">
+                    Не гума, а запатентована суміш Purofort® Dunlop, яка легша, тепліша та
+                    міцніша.
+                </div>
+            </div>
+        </div>
+        <div class="innovation__img" style="background-image: url(/static/source/img/innovation/Group.png)">
+            <img src="/static/source/img/innovation/image 13.png" alt="" />
+            <img class="img_2" src="/static/source/img/innovation/image 12.png" alt="" />
+        </div>
+        <div class="innovation__column">
+            <div class="innovation_item">
+                <div class="innovation_item__num">04</div>
+                <div class="innovation_item__title">ЗАХИСТ З МЕТАЛУ</div>
+                <div class="innovation_item__description">
+                    Стальний захисний носок і стальна міжпідошва для захисту від падіння
+                    та проколу гострими предметами.
+                </div>
+            </div>
+            <div class="innovation_item">
+                <div class="innovation_item__num">05</div>
+                <div class="innovation_item__title">ФІКСОВАНА СТАБІЛЬНІСТЬ</div>
+                <div class="innovation_item__description">
+                    Посилений скловолокном ріжок та жорстка п'ятка гарантує потрібну
+                    стабільність та підтримку гомілкостопу.
+                </div>
+            </div>
+            <div class="innovation_item">
+                <div class="innovation_item__num">06</div>
+                <div class="innovation_item__title">Підошва ALL TERRAIN OUTSOLE</div>
+                <div class="innovation_item__description">
+                    з рейтингом протиковзання SRC для оптимального зчеплення на будь-якій
+                    місцевості.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="product">
+    <div class="product container">
+        <div class="product__title">Ви вже переглядали</div>
+        <div class="product__slider swiper-container">
+            <div class="swiper-wrapper product_card_container">
+                {% for product in viewed_products %}
+                <div class="swiper-slide product_card-wrapper">
+                    <div data-id="{{product.id}}" class="product_card">
+                    <div class="product_card__top">
+                        <div class="product_card__img">
+                            <img src="{{product.image_url}}" alt="" />
+                            {% if product.logo %}
+                            <img class="european_badge" src="{{product.logo_url}}" />
+                            {% endif %}
+                        </div>
+                        <div class="product_card__title">{{product.title}}</div>
+                        <div data-url="{{product.get_absolute_url}}" class="product_card__btn absolute_center">
+                            <a href="{{product.get_absolute_url}}">
+                                <button class="btn_1 product_btn_details">ДЕТАЛЬНІШЕ</button>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="product_card__bottom">
+                        <div class="product_card__bottom-left">
+                            <div class="product_card__price">
+                                <span>{{product.price}}</span> грн
+                            </div>
+                            <a class="product_card__manufacturer"> Dunlop
+                                {% if product.article %}{{product.article}}{% endif %} </a>
+                        </div>
+                        <div class="product_card__bottom-btn">
+                            <button class="button-buy modal_open buy_btn" data-href="quckly_shop"
+                                data-id="{{product.id}}">
+                                Купити в 1 клік
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                
+                {% endfor %}
+            </div>
+            <div class="swiper-button-prev product-slider-btn-prev"></div>
+            <div class="swiper-button-next product-slider-btn-next"></div>
+        </div>
+    </div>
+</section>
+
+<section id="reviews" class="reviews">
+    <div class="overlay write-review-modal-overlay">
+        <div class="modal__block write-review-modal">
+            <button class="modal_close write-review-modal__close-btn">
+                <img src="/static/source/img/x-mark.svg" alt="x-mark" />
+            </button>
+            <h4 class="title write-review-modal__title">Ваш відгук:</h4>
+            <form class="form form-write-review validation__block" data-product-id="{{product.id}}">
+                <div class="star-rating-clickable write-review-modal__star-rating">
+                    <input name="star" id="star-5" type="radio" value="100" />
+                    <label for="star-5"></label>
+                    <input name="star" id="star-4" type="radio" value="80" />
+                    <label for="star-4"></label>
+                    <input name="star" id="star-3" type="radio" value="60" checked />
+                    <label for="star-3"></label>
+                    <input name="star" id="star-2" type="radio" value="40" />
+                    <label for="star-2"></label>
+                    <input name="star" id="star-1" type="radio" value="20" />
+                    <label for="star-1"></label>
+                </div>
+                <div class="form__part form__part-contacts">
+                    <div class="form__part-center">
+                        <div class="form__inputs-wrapper">
+                            <div class="form__field form__contacts-field validation_container">
+                                <input class="form__field-input validation_input" id="lastName" data-type="name"
+                                    name="lastName" type="text" required />
+                                <label for="lastName">Прізвище</label>
+                            </div>
+
+                            <div class="form__field form__contacts-field validation_container">
+                                <input class="form__field-input validation_input" id="firstName" data-type="name"
+                                    name="firstName" type="text" required />
+                                <label for="firstName">Ім’я</label>
+                            </div>
+                        </div>
+
+                        <div class="form__field form__contacts-field validation_container">
+                            <input class="form__field-input validation_input" id="tel" data-type="phone" name="tel"
+                                type="tel" required />
+                            <label for="tel">Мобільний телефон</label>
+                            <span class="badge form__contacts-field-tooltip">?</span>
+                        </div>
+
+                        <div class="form__field form__contacts-field validation_container">
+                            <input class="form__field-input validation_input" id="email" data-type="email" name="email"
+                                type="email" required />
+                            <label for="email">Email</label>
+                        </div>
+
+                        <div class="form__field form__contacts-field validation_container">
+                            <textarea class="form__field-input write-review-modal__ validation_input" id="comment"
+                                data-type="comment" name="comment" type="comment" required></textarea>
+                            <label for="comment">Comment</label>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn_3 write-review-modal__send-btn validation_btn" type="submit">
+                    Надіслати
+                </button>
+            </form>
+        </div>
+    </div>
+    <div class="container">
+        <div class="reviews__wrapper">
+            <div class="swiper reviews-swiper">
+                <div class="swiper-wrapper reviews__items">
+                    {% for review in reviews %}
+                    <div class="swiper-slide reviews__item">
+                        <h4 class="reviews__item-author-name">{{review.full_name}}</h4>
+                        <time class="reviews__item-date"
+                            datetime="{{review.created|date:'d.m.Y'}}">{{review.created|date:'d.m.Y'}}
+                        </time>
+                        <div class="star-rating reviews__star-rating">
+                            <div class="star-rating__body">
+                                <div class="star-rating__active" style="width: {{review.rating}}%"></div>
+                                <div class="star-rating__items">
+                                    <input type="radio" class="star-rating__item" value="1" name="star-rating" />
+                                    <input type="radio" class="star-rating__item" value="2" name="star-rating" />
+
+                                    <input type="radio" class="star-rating__item" value="3" name="star-rating" />
+
+                                    <input type="radio" class="star-rating__item" value="4" name="star-rating" />
+
+                                    <input type="radio" class="star-rating__item" value="5" name="star-rating" />
+                                </div>
+                            </div>
+                        </div>
+                        <p class="reviews__item-comment">{{review.text}}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <button class="modal_open btn_transparent-bordered reviews__write-review-btn"
+                data-href="write-review-modal">
+                Написати відгук
+            </button>
+        </div>
+    </div>
+</section>
+
+<section class="advances container" id="advances">
+    <div class="title-2" style="
+      background-image: url(/static/source/img/advances/переваги\ взуття.png);
+    ">
+        переваги взуття
+    </div>
+    <div class="advances__items swiper-container">
+        <div class="swiper-wrapper">
+            {% for advantage in advantages %}
+            <div class="advances__item swiper-slide">
+                <img src="{{advantage.image_url}}" alt="{{advantage.title}}" />
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock content %} {% block scripts %}
+<script src="/static/source/pages/product/index.js"></script>
+{% endblock scripts %}

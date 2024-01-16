@@ -1,0 +1,63 @@
+<html>
+
+<head>
+<style>
+.circle{
+
+    display: block;
+    width: 25px;
+    height: 25px;
+    background-color: #{{contact.product_color.color}};
+    border-radius: 100%;
+}
+
+</style>
+
+</head>
+<body>
+
+Ім'я: {{order.surname|safe}} {{order.name|safe}}<br>
+Email: <a href="mailto:{{order.email|safe}}">{{order.email|safe}}</a><br>
+{% if order.phone %}
+Телефон: <a href="tel:{{order.phone|safe}}">{{order.phone|safe}}</a><br>
+{% endif %}
+{% if order.address %}
+Адреса: {{order.address|safe}}<br>
+{% endif %}
+{% if order.settlement %}
+Населений пункт: {{order.settlement.title|safe}}<br>
+{% endif %}
+{% if order.warehouse %}
+Відділення: {{order.warehouse.title|safe}}<br>
+{% endif %}
+{% if order.message %}
+Коментар: {{order.message|safe}}<br>
+{% endif %}
+Спосіб оплати: {{order.payment_type|safe}}<br>
+Загальна вартість: {{order.cart.get_total_price|stringformat:'.2f'}} ₴<br>
+{% for cart_product in order.cart.cart_products.all %}
+<br>
+#{{forloop.counter}} {{cart_product.product.title|safe}}<br>
+<div style="max-width: 350px; max-height: 325;">
+    <img style="width:100%; height:100%;" src="{{cart_product.product.get_absolute_image_url}}" alt="cart_product.product.title">
+</div><br>
+{% if cart_product.product_color %}
+Колір: {{cart_product.product_color.title}} <span class="circle" style="display: block; width: 25px; height: 25px; background-color: {{cart_product.product_color.color}}; border-radius: 100%;"></span><br>
+{% endif %}
+
+<span>
+    {{contact.product_color.color}}
+
+</span>
+
+{% if cart_product.product_size %}
+Розмір: {{cart_product.product_size.title}}
+{% endif %}
+<br>
+{% if cart_product.quantity %}
+Кількість: {{cart_product.quantity}}
+{% endif %}
+<br>
+{% endfor %}
+</body>
+</html>

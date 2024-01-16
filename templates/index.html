@@ -1,0 +1,721 @@
+{% extends '_base.html' %} {% block styles %}
+<link rel="stylesheet" href="/static/source/lib/uikit-3.14.1/css/uikit.css" />
+<link rel="stylesheet" href="/static/source/fonts/stylesheet.css" />
+<link rel="stylesheet" href="/static/source/pages/index/index.css" />
+{% endblock styles %} {% block header %}
+
+<header class="header">
+  <div class="header_mob_nav">
+    <a href="tel:{{site.phone}}" class="color_white"> {{site.phone}} </a>
+    <a href="#product" class="color_gray2"> Продукція </a>
+    <a href="#about" class="color_gray2"> Про нас </a>
+    <a href="#contact_footer" class="color_white"> Контакти </a>
+    <a href="{{site.file}}" download>
+      <img src="/static/source/img/header/bi_download.svg" alt="download" />
+      Прайс {{site.updated|date:'Y'}}
+    </a>
+  </div>
+
+  <div class="modal_loading__block">
+    <img src="/static/source/img/loader2.gif" alt="" />
+  </div>
+
+  <div class="modal_accept__block">
+    <div class="modal_accept_svg">
+      <svg
+        color="green"
+        aria-hidden="true"
+        focusable="false"
+        data-prefix="fas"
+        data-icon="check"
+        role="img"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 512 512"
+        class="svg-inline--fa fa-check fa-w-16 fa-3x"
+      >
+        <path
+          fill="currentColor"
+          d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+          class=""
+        ></path>
+      </svg>
+    </div>
+
+    <div class="modal_accept_text bold_title bold_title_2 color_green">
+      Все пройшло успішно
+    </div>
+  </div>
+
+  <div class="modal_bad__block">
+    <div class="modal_bad_svg">
+      <svg
+        color="red"
+        aria-hidden="true"
+        focusable="false"
+        data-prefix="fas"
+        data-icon="times"
+        role="img"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 352 512"
+        class="svg-inline--fa fa-times fa-w-11 fa-3x"
+      >
+        <path
+          fill="currentColor"
+          d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+          class=""
+        ></path>
+      </svg>
+    </div>
+
+    <div class="modal_bad_text bold_title bold_title_2 color_red">
+      Щось пішло не так, спробуйте пізніше
+    </div>
+  </div>
+
+  <div class="overlay">
+    <div class="modal__block quckly_shop">
+      <div class="modal_close">✖</div>
+
+      <form
+        action="{% url 'contact' %}"
+        class="modal_form validation__block quckly_shop_form"
+      >
+        {% csrf_token %}
+        <div class="input__wrap validation_container input_section">
+          <input
+            class="modal_input quick_buy__name input validation_input"
+            data-type="name"
+            name="name"
+            placeholder="Ім’я *"
+            type="text"
+          />
+        </div>
+        <div class="input__wrap validation_container input_section">
+          <input
+            class="modal_input quick_buy__phone input validation_input"
+            data-type="phone"
+            name="phone"
+            placeholder="Телефон *"
+          />
+        </div>
+        <div class="input__wrap validation_container input_section">
+          <input
+            type="email"
+            class="modal_input quick_buy__phone input validation_input"
+            data-type="email"
+            name="email"
+            placeholder="Email *"
+          />
+        </div>
+        <div class="input_section input__wrap validation_container">
+          <textarea
+            class="quick_buy__massage input validation_input textarea_basic"
+            cols="30"
+            data-required="false"
+            data-type="comment"
+            id=""
+            name="comment"
+            placeholder="Ваш коментар"
+            rows="10"
+          ></textarea>
+        </div>
+        <div class="">
+          <input
+            class="form_submit validation_btn btn_1 quick_buy__btn"
+            type="submit"
+            value="Відправити"
+          />
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="header_left">
+    <div class="header_hamburger" id="hamburger">
+      <div class="header_line header_line_1"></div>
+      <div class="header_line header_line_2"></div>
+      <div class="header_line header_line_3"></div>
+    </div>
+    <div class="logo">
+      <a href="{% url 'index' %}">
+        <img src="/static/source/img/common/IMAGE.svg" alt="" />
+      </a>
+    </div>
+  </div>
+
+  <div id="header_tel_mob" class="header_links__block">
+    <a href="tel:{{site.phone}}" class="color_white"> {{site.phone}} </a>
+    <button class="open-cart-btn header-new__cart-btn">
+      <img src="/static/source/img/header/ic-basket.svg" />
+      <!-- якщо додано хоч 1 товар в корзину, то додається клас active і відображається мітка на корзині -->
+      <span
+        class="header-new__cart-mark{% if cart_products %} active{% endif %}"
+      ></span>
+    </button>
+  </div>
+  <div class="header_links">
+    <div class="header_links__block">
+      <a href="#product" class="color_gray2"> продукція </a>
+      <a href="#about" class="color_gray2">про нас</a>
+    </div>
+    <div class="header_links__block">
+      <a href="#contact" class="color_white"> Контакти </a>
+      <a href="tel:{{site.phone}}" class="color_white"> {{site.phone}} </a>
+      <button class="open-cart-btn header-new__cart-btn">
+        <img src="/static/source/img/header/ic-basket.svg" />
+        <!-- якщо додано хоч 1 товар в корзину, то додається клас active і відображається мітка на корзині -->
+        <span
+          class="header-new__cart-mark{% if cart_products %} active{% endif %}"
+        ></span>
+      </button>
+    </div>
+  </div>
+  <div class="header__download">
+    <a href="{{site.file}}" download>
+      <img src="/static/source/img/header/bi_download.svg" alt="download" />
+      Прайс {{site.updated|date:'Y'}}
+    </a>
+  </div>
+
+  <div class="overlay cart-overlay">
+    <div class="cart">
+      <div class="cart__top">
+        <h3 class="cart__title">Кошик</h3>
+        <button class="close-cart-btn cart__close-btn">
+          <img src="/static/source/img/x-mark.svg" alt="close" />
+        </button>
+      </div>
+      <div class="cart__items">
+        {% for cart_product in cart.cart_products.all %}
+        <div
+          class="cart__item"
+          data-id="{{cart_product.id}}"
+          data-product-id="{{cart_product.product.id}}"
+        >
+          <button class="cart__item-remove">
+            <img src="/static/source/img/x-mark.svg" alt="x-mark" />
+          </button>
+          <a href="{{cart_product.product.get_absolute_url}}">
+            <img
+              src="{{cart_product.product.image_url}}"
+              alt="{{cart_product.product.title}}"
+            />
+          </a>
+          <div class="cart__item-info">
+            <h4 class="cart__item-title">{{cart_product.product.title}}</h4>
+            <div class="cart__item-params">
+              <p>Колір:<span>{{cart_product.product_color.title}}</span></p>
+              <p>Розмір:<span>{{cart_product.product_size.title}}</span></p>
+            </div>
+            <div class="cart__item-bottom">
+              <div class="counter">
+                <button
+                  data-id="{{cart_product.id}}"
+                  data-href="{% url 'cart_product' %}"
+                  class="counter__minus-btn"
+                >
+                  -
+                </button>
+                <input
+                  class="counter__value"
+                  type="number"
+                  value="{{cart_product.quantity}}"
+                />
+                <button
+                  data-id="{{cart_product.id}}"
+                  data-href="{% url 'cart_product' %}"
+                  class="counter__plus-btn"
+                >
+                  +
+                </button>
+              </div>
+              <p class="cart__item-price">
+                <span>{{cart_product.get_total_price}}</span>грн
+              </p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="cart__bottom">
+        <div class="cart__total-price-info">
+          <div class="cart__total-price-top">
+            <span>Загалом:</span>
+            <span class="cart__total-price-count"
+              ><span>{{cart.get_total_price}}</span>грн</span
+            >
+          </div>
+          <p class="cart__total-price-text">
+            Вартість доставки розраховується при оформленні замовлення.
+          </p>
+        </div>
+        <a href="{% url 'order' %}">
+          <button
+            data-href="{% url 'order' %}"
+            class="btn_3 cart__place-order-btn"
+          >
+            Оформити замовлення
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+{% endblock header %} {% block content %}
+
+<div class="help">
+  <a class="modal_open" data-href="quckly_shop"> Потрібна допомога </a>
+</div>
+
+<section class="top">
+  <div class="details modal__block modal_details_block">
+    <div class="modal_close">✖</div>
+    <div class="modal_details_block__img">
+      <img src="/static/source/img/top/slide2/Frame 156.png" alt="" />
+    </div>
+  </div>
+  <div class="top_slider">
+    <div class="top_slider_container swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide top_slider__slide">
+          <img
+            class="img_bg"
+            src="/static/source/img/top/RigPRO_INUSE_01_300dpi_100x75mm_D_NR-2617 2.png"
+            alt=""
+          />
+          <div
+            class="top_slider-left"
+            style="
+              background: url(/static/source/img/top/Rectangle\ 2.png),
+                linear-gradient(
+                  179.34deg,
+                  #e6d3d1 39.74%,
+                  rgba(230, 211, 209, 0) 99.43%
+                );
+              background-repeat: no-repeat;
+              background-size: 100% 100%;
+            "
+          >
+            <div class="top_slider__title">
+              <img src="/static/source/img/top/Fill-2.png" alt="" />
+            </div>
+            <div class="top_slider_wrapper">
+              <div class="top_slider__title-2 slider__title">
+                ПРЕДСТАВЛЯЄ НОВУ колекцію FIELDPRO
+              </div>
+              <div class="top_slider_btn">
+                <button
+                  class="btn_1 modal_open buy_btn"
+                  data-href="quckly_shop"
+                >
+                  КУПИТИ
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="top_slider-right"
+            style="
+              background: url(/static/source//img/top/Mask\ group.png),
+                linear-gradient(168.63deg, #f0493e 2.85%, #000000 104.02%);
+              background-repeat: no-repeat;
+              background-position: bottom;
+            "
+          >
+            <div class="top_slider__title">
+              <img src="/static/source/img/top/Fill-2 (1).png" alt="" />
+            </div>
+          </div>
+        </div>
+        <div
+          class="swiper-slide top_slider__slide slide2"
+          style="
+            background-image: url(/static/source/img/top/Mask\ group.png),
+              linear-gradient(
+                140deg,
+                #cfcfcf 20.72%,
+                #f0493e 42.1%,
+                #000000 69.59%
+              );
+          "
+        >
+          <div class="slide2_line-1 frame">
+            <img src="/static/source/img/top/slide2/Frame 155.png" alt="" />
+            <img src="/static/source/img/top/slide2/Frame (1).png" alt="" />
+          </div>
+          <div class="slide2_line-2">
+            <img
+              class="slide2_line-2-1"
+              src="/static/source/img/top/slide2/Dunlop_Snugboot_Trailblazer_OD60B93_CH_96dpi_1024x1024px_E_NR_2211.png"
+              alt=""
+            />
+            <img
+              class="slide2_line-2-2"
+              src="/static/source/img/top/slide2/Ресурс 3@4x 1.png"
+              alt=""
+            />
+            <img
+              class="slide2_line-2-3"
+              src="/static/source/img/top/slide2/Ресурс 3@4x 2.png"
+              alt=""
+            />
+          </div>
+          <div class="slide2_line-3">
+            <span class="frame">
+              <img src="/static/source/img/top/slide2/Frame 154.png" alt="" />
+              <img src="/static/source/img/top/slide2/Frame.png" alt="" />
+            </span>
+            <span class="slide2_line-3__column top_slider_wrapper">
+              <div class="slide2_line-3__title slider__title">
+                Все для комфорту
+              </div>
+              <button class="btn_1 modal_open details_btn" data-href="details">
+                ДЕТАЛЬНІШЕ
+              </button>
+            </span>
+          </div>
+        </div>
+        <div
+          class="swiper-slide top_slider__slide slide3"
+          style="
+            background: linear-gradient(
+              168.63deg,
+              #f0493e 2.85%,
+              #000000 104.02%
+            );
+            background-repeat: no-repeat;
+            background-position: bottom;
+          "
+        >
+          <div class="top_slider-left img_block">
+            <img src="/static/source/img/top/slide3/all.png" alt="" />
+          </div>
+          <div class="top_slider-right">
+            <div class="top_slider__text">
+              <div class="top_slider__text-1">Обирай</div>
+              <div class="top_slider__text-2">свою</div>
+              <div class="top_slider__text-1">індустрію</div>
+            </div>
+            <div class="top_slider_category">
+              {% for category in categories %}
+              <a
+                href="#{{category.slug}}"
+                class="link_category"
+                data-slug="{{category.slug}}"
+              >
+                {{category.title}}
+              </a>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-button-prev top-slider-btn-prev"></div>
+      <div class="swiper-button-next top-slider-btn-next"></div>
+    </div>
+    <div class="top_social">
+      <div class="top_social_img">
+        <img src="/static/source/img/top/Group.png" alt="" />
+      </div>
+      <div class="top_social_links">
+        <a href="{{site.facebook}}">facebook</a>
+        <a href="{{site.instagram}}">instagram</a>
+        <a href="{{site.youtube}}">youtube</a>
+      </div>
+      <div class="swiper-pagination top_slider-pagination"></div>
+    </div>
+  </div>
+  <div class="top_info_mob">
+    <div class="top_info_mob-top">
+      <div class="top_slider__title-2 mob__title">
+        ПРЕДСТАВЛЯЄ НОВУ колекцію FIELDPRO
+      </div>
+      <div class="pagination-mob"></div>
+    </div>
+    <div class="top_slider_btn">
+      <button class="btn_1 modal_open buy_mob-btn" data-href="quckly_shop">
+        КУПИТИ
+      </button>
+      <button class="btn_1 modal_open details_btn-mob" data-href="details">
+        ДЕТАЛЬНІШЕ
+      </button>
+    </div>
+  </div>
+</section>
+
+<section
+  class="scope container"
+  style="
+    background: url(/static/source/img/scope/Rectangle\ 19.png),
+      linear-gradient(180deg, #1a1717 0%, #371010 100%);
+    background-blend-mode: overlay;
+    background-repeat: no-repeat;
+    background-position: right;
+  "
+>
+  <div class="scope__title">
+    <div class="scope__title-1">Область застосування</div>
+    <div class="scope__title-2">
+      Основною нашою задачею є розробка захисного взуття для конкретних умов
+      роботи та можливих небезпек у кожній області застосування, де важливий не
+      дизайн та колір продукту, а якість, продуктивність та комфорт у
+      використанні.
+    </div>
+  </div>
+  <div class="uk-child-width-1-2@s" uk-grid>
+    <div uk-grid class="scope_columns">
+      <div class="uk-width-auto@m column">
+        <ul
+          class="uk-tab-left"
+          uk-tab="connect: #component-tab-left; animation: uk-animation-slide-left-medium, uk-animation-slide-right-medium"
+        >
+          {% for category in categories %}
+          <li>
+            <a href="#"> {{category.title}} </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="uk-width-expand@m column">
+        <ul id="component-tab-left" class="uk-switcher">
+          {% for category in categories %}
+          <li class="column__title">
+            <div class="column__title-1">{{category.get_first_word}}</div>
+            <div class="column__title-2-container">
+              {% for word in category.get_words %}
+              <div class="column__title-2">{{word}}</div>
+              {% endfor %}
+            </div>
+            <div class="column__img">
+              <a
+                href="#{{category.slug}}"
+                class="link_category"
+                data-slug="{{category.slug}}"
+              >
+                бІЛЬШЕ ТОВАРІВ В ЦІЙ КАТЕГОРІЇ →
+              </a>
+              <img src="{{category.image_url}}" alt="" />
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="innovation container" id="innovation">
+  <div class="innovation__title">
+    <div
+      class="title"
+      style="
+        background-image: url(/static/source/img/innovation/Технологія.png);
+      "
+    >
+      ІННОВАЦІЯ PUROFORT
+    </div>
+    <div class="innovation__title-1">
+      За своїми властивостями цей матеріал є ефективнішим за гуму та базовий
+      поліуретан. На початку 1980-х Dunlop заново винайшов гуму і випустив свої
+      перші чоботи Purofort®. Взуття Purofort® – найкраще в своєму класі
+      поліуретанові чоботи. Понад 10 мільйонів людей у ​​всьому світі носять це
+      унікальне взуття щодня.
+    </div>
+  </div>
+  <div class="innovation__columns">
+    <div class="innovation__column">
+      <div class="innovation_item">
+        <div class="innovation_item__num">01</div>
+        <div class="innovation_item__title">PUROTEX UPPER</div>
+        <div class="innovation_item__description">
+          Не неопрен, а 4-шаровий матеріал, який на 100% водонепроникний зовні і
+          пропускає повітря всередині.
+        </div>
+      </div>
+      <div class="innovation_item">
+        <div class="innovation_item__num">02</div>
+        <div class="innovation_item__title">SNUG LAST</div>
+        <div class="innovation_item__description">
+          Унікальна технологія розроблена для ідеальної посадки стопи та
+          комфорту.
+        </div>
+      </div>
+      <div class="innovation_item">
+        <div class="innovation_item__num">03</div>
+        <div class="innovation_item__title">PUROFORT® SHAFT</div>
+        <div class="innovation_item__description">
+          Не гума, а запатентована суміш Purofort® Dunlop, яка легша, тепліша та
+          міцніша.
+        </div>
+      </div>
+    </div>
+    <div
+      class="innovation__img"
+      style="background-image: url(/static/source/img/innovation/Group.png)"
+    >
+      <img src="/static/source/img/innovation/image 13.png" alt="" />
+      <img
+        class="img_2"
+        src="/static/source/img/innovation/image 12.png"
+        alt=""
+      />
+    </div>
+    <div class="innovation__column">
+      <div class="innovation_item">
+        <div class="innovation_item__num">04</div>
+        <div class="innovation_item__title">ЗАХИСТ З МЕТАЛУ</div>
+        <div class="innovation_item__description">
+          Стальний захисний носок і стальна міжпідошва для захисту від падіння
+          та проколу гострими предметами.
+        </div>
+      </div>
+      <div class="innovation_item">
+        <div class="innovation_item__num">05</div>
+        <div class="innovation_item__title">ФІКСОВАНА СТАБІЛЬНІСТЬ</div>
+        <div class="innovation_item__description">
+          Посилений скловолокном ріжок та жорстка п'ятка гарантує потрібну
+          стабільність та підтримку гомілкостопу.
+        </div>
+      </div>
+      <div class="innovation_item">
+        <div class="innovation_item__num">06</div>
+        <div class="innovation_item__title">Підошва ALL TERRAIN OUTSOLE</div>
+        <div class="innovation_item__description">
+          з рейтингом протиковзання SRC для оптимального зчеплення на будь-якій
+          місцевості.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="product">
+  {% for category in categories %}
+  <div
+    class="product container"
+    id="{{category.slug}}"
+    data-index="{{forloop.counter|add:-1}}"
+  >
+    <div class="product__title">{{category.title}}</div>
+    <div class="product__slider swiper-container">
+      <div class="swiper-wrapper product_card_container">
+        {% for product in category.get_active_products %}
+        <div class="swiper-slide product_card-wrapper">
+          <div data-id="{{product.id}}" class="product_card">
+          <div class="product_card__top">
+            <div class="product_card__img">
+              <img src="{{product.image_url}}" alt="" />
+              {% if product.logo %}
+              <img class="european_badge" src="{{product.logo_url}}" />
+              {% endif %}
+            </div>
+            <div class="product_card__title">{{product.title}}</div>
+            <div
+              data-url="{{product.get_absolute_url}}"
+              class="product_card__btn absolute_center"
+            >
+              <a href="{{product.get_absolute_url}}">
+                <button class="btn_1 product_btn_details">ДЕТАЛЬНІШЕ</button>
+              </a>
+            </div>
+          </div>
+          <div class="product_card__bottom">
+            <div class="product_card__bottom-left">
+              <div class="product_card__price">
+                <span>{{product.price}}</span> грн
+              </div>
+              <a class="product_card__manufacturer"> Dunlop {% if product.article %}{{product.article}}{% endif %} </a>
+            </div>
+            <div class="product_card__bottom-btn">
+              <button
+                class="button-buy modal_open buy_btn"
+                data-href="quckly_shop"
+                data-id="{{product.id}}"
+              >
+                Купити в 1 клік
+              </button>
+            </div>
+          </div>
+        </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="swiper-button-prev product-slider-btn-prev"></div>
+      <div class="swiper-button-next product-slider-btn-next"></div>
+    </div>
+  </div>
+  {% endfor %}
+</section>
+
+<section class="advances container" id="advances">
+  <div
+    class="title"
+    style="
+      background-image: url(/static/source/img/advances/переваги\ взуття.png);
+    "
+  >
+    переваги взуття
+  </div>
+  <div class="advances__items swiper-container">
+    <div class="swiper-wrapper">
+      {% for advantage in advantages %}
+      <div class="advances__item swiper-slide">
+        <img src="{{advantage.image_url}}" alt="" />
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <!-- <div class="swiper-pagination advances-pagination"></div> -->
+</section>
+
+<section
+  class="about container"
+  id="about"
+  style="background-image: url(/static/source/img/about/Rectangle\ 18.png)"
+>
+  <div class="about__title">
+    <div class="about__title-1">
+      Наша компанія Dunlop Protective Footwear, є провідний світовим виробником
+      захисного взуття. У більш ніж 75 країнах світу ми пропонуємо зручне та
+      захисне взуття для працівників таких галузей як: сільське та рибне
+      господарство, харчова промисловість, будівництво, а також гірничодобувної
+      та нафтогазової промисловості. Ми вивчили ці галузі з середини, і,
+      поєднуючи інновації з майстерністю, можемо запропонувати вам те, на що ви
+      заслуговуєте: найкращі робочі чоботи у світі.
+    </div>
+    <div class="about__title-2">Про нас</div>
+  </div>
+  <div class="about__img" uk-lightbox>
+    <a href="/static/source/img/about/inescop.png">
+      <img src="/static/source/img/about/inescop.png" alt="" />
+    </a>
+    <a
+      href="/static/source/img/about/CERTIFICATE-OFFICIAL PARTNER-DRAFT CC_230307_170900.png"
+    >
+      <img
+        src="/static/source/img/about/CERTIFICATE-OFFICIAL PARTNER-DRAFT CC_230307_170900.png"
+        alt="CERTIFICATE"
+      />
+    </a>
+  </div>
+</section>
+
+<section class="youtobe">
+  <iframe
+    loading="lazy"
+    width="100%"
+    height="810"
+    src="https://www.youtube.com/embed/3EQ9XK5Dfzw"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+  >
+  </iframe>
+</section>
+{% endblock content %} {% block scripts %}
+<script src="/static/source/lib/uikit-3.14.1/js/uikit.min.js"></script>
+<script src="/static/source/lib/uikit-3.14.1/js/uikit-icons.min.js"></script>
+<script src="/static/source/pages/index/index.js"></script>
+{% endblock scripts %}

@@ -1,0 +1,28 @@
+<style>
+    .circle{
+        display: block;
+        width: 25px;
+        height: 25px;
+        background-color: #{{contact.product_color.color}};
+        border-radius: 100%;
+    }
+</style>
+    
+
+Ім'я: {{contact.name|safe}}<br>
+Email: <a href="mailto:{{contact.email|safe}}">{{contact.email|safe}}</a><br>
+Телефон: <a href="tel:{{contact.phone|safe}}">{{contact.phone|safe}}</a><br>
+{% if contact.product %}
+Товарна пропозиція: {{contact.product.title|safe}}<br>
+<div style="max-width: 450px; max-height: 400;">
+    <img style="width:100%; height:100%;" src="{{contact.product.get_absolute_image_url}}" alt="contact.product.title">
+</div><br>
+{% endif %}
+{% if contact.product_color %}
+{{contact.product_color.color}}
+Колір: {{contact.product_color.title}} <span class="circle" style="display: block; width: 25px; height: 25px; background-color: {{contact.product_color.color}}; border-radius: 100%;"></span><br>
+{% endif %}
+{% if contact.product_size %}
+Розмір: {{contact.product_size.title}}<br>
+{% endif %}
+Коментар: {{contact.comment|safe}}<br>

@@ -1,0 +1,182 @@
+<footer class="footer">
+    <div class="container">
+      <div class="footer_main">
+        <div class="footer__column" id="contact">
+          <div class="footer__item">Контакти</div>
+          <div class="footer__item">
+            вул. Промислова 54
+            <br />
+            Львів, 79024 Україна
+          </div>
+          <div class="footer__item footer__tel">
+            {% for site_phone in site.phones.all %}
+            <a href="tel:{{site_phone.phone}}">{{site_phone.phone}}</a>
+            {% endfor %}
+            <a href="tel:{{site.phone}}">{{site.phone}}</a>
+          </div>
+          <div class="footer__item">
+            <a href="mailto:{{site.mail}}">{{site.mail}}</a>
+          </div>
+        </div>
+        <div class="footer__column">
+          <a href="#product" class="footer__item"> продукція </a>
+          <a href="#innovation" class="footer__item"> ІННОВАЦІЯ </a>
+          <a href="#advances" class="footer__item"> уМОВНІ ПОЗНАЧЕННЯ </a>
+          <a href="#about" class="footer__item"> про нас </a>
+          <a href="{% url 'delivery' %}" class="footer__item">Умови доставки та оплати</a>
+          <a href="{% url 'delivery' %}" class="footer__item">Повернення та обмін</a>
+          <a href="{% url 'delivery' %}" class="footer__item">Гарантія</a>
+          <a href="{% url 'delivery' %}" class="footer__item">Політика конфіденційності</a>
+
+
+
+        </div>
+        <div class="footer__column">
+          <div class="footer__item">Слідкуй за нами</div>
+          <div class="footer__item">
+            <a href="{{site.instagram}}">
+              <img src="/static/source/img/footer/instagram.svg" alt="" />
+            </a>
+            <a href="{{site.facebook}}">
+              <img src="/static/source/img/footer/Frame 45.svg" alt="" />
+            </a>
+            <a href="{{site.youtube}}">
+              <img src="/static/source/img/footer/Frame 47.svg" alt="" />
+            </a>
+          </div>
+          <a
+            href="{% url 'delivery' %}"
+            target="_blank"
+            class="footer__item"
+          >
+            Договір Публічної Оферти
+          </a>
+        </div>
+        <div class="footer__column">
+          <div class="footer__item">
+            Dunlop®ProtectiveFootwer works closely with
+          </div>
+          <div class="footer__item">
+            <a href="#">
+              <img src="/static/source/img/footer/Group.svg" alt="" />
+            </a>
+            <a href="#">
+              <img src="/static/source/img/footer/Group (1).svg" alt="" />
+            </a>
+          </div>
+          <div class="footer__item">
+            <span class="footer__item"> Tested & Cetififed by </span>
+            <a href="#">
+              <img src="/static/source/img/footer/Group (2).svg" alt="" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer_mobile">
+        <div
+          class="footer_nav footer_nav_content__block footer__item"
+          id="contact_footer"
+        >
+          <div class="footer_nav_link">Контакти</div>
+          <div class="footer_nav_content">
+            <div class="footer__column">
+              <div class="footer__item">
+                вул. Промислова 54
+                <br />
+                Львів, 79024 Україна
+              </div>
+
+              <div class="footer__item footer__tel">
+                {% for site_phone in site.phones.all %}
+                <a href="tel:{{site_phone.phone}}">{{site_phone.phone}}</a>
+                {% endfor %}
+                <a href="tel:{{site.phone}}">{{site.phone}}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer_nav footer_nav_content__block footer__item">
+          <div class="footer_nav_link">Інформація</div>
+          <div class="footer_nav_content">
+            <div class="footer__column">
+              <a href="#product" class="footer__item"> продукція </a>
+              <a href="#innovation" class="footer__item"> ІННОВАЦІЯ </a>
+              <a href="#advances" class="footer__item"> уМОВНІ ПОЗНАЧЕННЯ </a>
+              <a href="#about" class="footer__item"> про нас </a>
+              <a href="{% url 'delivery' %}" class="footer__item">Умови доставки та оплати</a>
+              <a href="{% url 'delivery' %}" class="footer__item">Повернення та обмін</a>
+              <a href="{% url 'delivery' %}" class="footer__item">Гарантія</a>
+              <a href="{% url 'delivery' %}" class="footer__item">Політика конфіденційності</a>
+              <a
+              href="{% url 'delivery' %}"
+              target="_blank"
+              class="footer__item"
+            >
+              Договір Публічної Оферти
+            </a>
+            </div>
+          </div>
+        </div>
+        <div class="footer_nav footer_nav_content__block footer__item">
+          <div class="footer_nav_link">Сертифікати</div>
+          <div class="footer_nav_content">
+            <div class="footer__column">
+              <div class="footer__item">
+                Dunlop®ProtectiveFootwer works closely with^
+              </div>
+              <div class="footer__item">
+                <a href="#">
+                  <img src="/static/source/img/footer/Group.svg" alt="" />
+                </a>
+                <a href="#">
+                  <img src="/static/source/img/footer/Group (1).svg" alt="" />
+                </a>
+              </div>
+              <div class="footer__item">
+                <span class="footer__item"> Tested & Cetififed by </span>
+                <a href="#">
+                  <img src="/static/source/img/footer/Group (2).svg" alt="" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer__row">
+          <div class="footer__item">Слідкуй за нами</div>
+          <div class="footer__item footer_social">
+            <a href="{{site.instagram}}">
+              <img src="/static/source/img/footer/instagram.svg" alt="" />
+            </a>
+            <a href="{{site.facebook}}">
+              <img src="/static/source/img/footer/Frame 45.svg" alt="" />
+            </a>
+            <a href="{{site.youtube}}">
+              <img src="/static/source/img/footer/Frame 47.svg" alt="" />
+            </a>
+          </div>
+        </div>
+        <div class="footer__row footer__bottom">
+          <div class="copiright_mob">
+            2022 COPYRIGHT© DUNLOP® PROTECTIVE FOOTWEAR. ALL RIGHTS RESERVED
+          </div>
+          <div class="footer__item">
+            <a href="https://starway.agency/">
+              <img src="/static/source/img/footer/sw-logo 1.svg" alt="" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="copiright">
+      <div class="copiright_sw">
+        <span> Розробка сайту </span>
+        <a href="https://starway.agency/">
+          <img src="/static/source/img/footer/sw-logo 1.svg" alt="" />
+        </a>
+      </div>
+      <div class="copiright_text">
+        2022 COPYRIGHT© DUNLOP® PROTECTIVE FOOTWEAR. ALL RIGHTS RESERVED
+      </div>
+    </div>
+  </footer>

@@ -1,0 +1,59 @@
+//  тут шрифти 400 Manrope ==================>
+.regular_title {
+    font-weight: 400;
+    font-stretch: normal;
+    font-style: normal;
+    &_0 {
+        font-size: 12px;
+    }
+    &_1 {
+        font-size: 14px;
+    }
+    &_2 {
+        font-size: 16px;
+    }
+    &_3 {
+        font-size: 18px;
+    }
+    &_6 {
+        font-size: 30px;
+    }
+}
+
+//  тут шрифти 700 Manrope ==================>
+.bold_title {
+    font-weight: 700;
+    font-stretch: normal;
+    font-style: normal;
+    &_0 {
+        font-size: 12px;
+    }
+    &_1 {
+        font-size: 14px;
+    }
+    &_2 {
+        font-size: 16px;
+    }
+}
+
+.color {
+    &_black {
+        color: #000000;
+    }
+    &_white {
+        color: #fff;
+    }
+    &_red {
+        color: #CF1A20;
+    }
+    &_gray {
+        color: #828282;
+    }
+    &_gray1 {
+        color: #333333;
+    }
+    &_gray2 {
+        color: #272C35;
+    }
+    
+}

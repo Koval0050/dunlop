@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include 'includes/merch/google_tag.html' %}
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{site.meta_title}}</title>
+    {% include 'includes/merch/google_tag.html' %}
+    <meta content="{{site.meta_descr}}" name="description" />
+    <meta content="{{site.meta_key}}" name="keywords" />
+    <link href="{{site.image_url}}" rel="icon" type="svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="/media/logo.jpg" />
+    <meta property="og:image" content="/media/logo.jpg" />
+    <meta property="og:image:width" content="600" />
+    <meta property="og:image:height" content="350" />
+    <meta property="og:image:height" content="350" />
+    <meta
+      name="google-site-verification"
+      content="w_BpuJileTkdXl8wT7BTqjAHc85VjuOidMwVOgnU2S4"
+    />
+    <meta name="facebook-domain-verification" content="d82w794ebonqgp1rstsukwt4hr7bin" />
+    {% block meta %}
+    <title>{{page.meta_title}}</title>
+    <meta content="{{page.meta_description}}" name="description" />
+    <meta content="{{page.meta_keys}}" name="keywords" />
+    {% endblock meta %} {% block styles %}{% endblock styles %}
+  </head>
+
+  <body>
+    {% block header %}{% include 'includes/header.html' %}{% endblock header %}
+    {% block content %}{% endblock content %} {% include 'includes/footer.html' %} {% block scripts %}{% endblock scripts %}
+  </body>
+</html>
