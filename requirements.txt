@@ -1,0 +1,14 @@
+django==3.2.8
+pillow
+django-import-export
+django-rest-framework
+django-import-export
+django-ckeditor
+unidecode
+django-nested-admin
+django-ckeditor
+django-admin-sortable2
+django-colorfield
+requests
+python-decouple
+lxml

@@ -1,0 +1,12 @@
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py imp
+
+# simly run the project ↓↓↓
+
+. venv/Scripts/activate
+python manage.py runserver
+
+<!-- встановлення venv -->
+
+python -m venv venv

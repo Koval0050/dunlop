@@ -1,0 +1,110 @@
+// .btn_standart {
+//     transition: all .2s;
+//     min-width: 170px;
+//     display: block;
+//     cursor: pointer;
+//     width: -moz-fit-content;
+//     width: fit-content;
+//     letter-spacing: normal;
+//     text-align: center;
+//     display: flex;
+//
+//     border: none;
+//     outline: none;
+//     padding: 14.5px 10px;
+//     &_red {
+//         background: linear-gradient(180deg, #CF1A20 0%, #EE2A26 100%);
+//         box-shadow: 0px 10px 10px rgba(115, 202, 194, 0.5);
+//         border: solid 1px transparent !important;
+//         &:hover {
+//             border: solid 1px transparent !important;
+//             background: linear-gradient(180deg, rgb(168, 20, 25) 0%, rgb(194, 33, 30) 100%);
+//         }
+//     }
+//     &_white {
+//         background-color: #fff;
+//         box-shadow: 0px 10px 10px rgba(115, 202, 194, 0.5);
+//         border: solid 1px transparent !important;
+//         &:hover {
+//             border: solid 1px rgb(189, 210, 208) !important;
+//             background-color: rgb(189, 210, 208);
+//             color: #fff;
+//         }
+//     }
+// }
+
+.btn_red {
+  background-color: #ce0f18;
+  width: 210px;
+  color: white;
+  height: 62px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 20px;
+  text-align: center;
+  &:hover {
+    //border: solid 1px transparent;
+    box-shadow: 0px 5px 5px rgba(139, 139, 139, 0.29);
+  }
+}
+
+.btn_white {
+  background-color: #ffffff;
+  width: 210px;
+  color: #ce0f18;
+  height: 62px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 10px;
+  &:hover {
+    //border: solid 1px transparent;
+    box-shadow: 0px 5px 5px rgba(139, 139, 139, 0.29);
+  }
+}
+
+.btn_3 {
+  padding: 15px;
+  gap: 10px;
+  background-color: #272c35;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 23px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+  position: relative;
+
+  &:hover {
+    background-color: #5b626f;
+  }
+}
+
+.btn_transparent-bordered {
+  background-color: transparent;
+  text-transform: uppercase;
+  color: #272c35;
+  font-size: 18px;
+  line-height: 27px;
+  font-weight: 700;
+  border: 1px solid #272c35;
+
+  &:hover {
+    background-color: #272c35;
+    color: #fff;
+  }
+}
+
+.go-back-btn {
+  display: flex;
+  align-items: center;
+  text-transform: capitalize;
+  color: #272c35;
+  font-size: 12px;
+  line-height: 18px;
+
+  &::before {
+    content: url("/static/source/img/arrow.svg");
+    margin-right: 8px;
+  }
+}

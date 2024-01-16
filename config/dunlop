@@ -1,0 +1,101 @@
+server{
+    server_name mydunlop.com.ua;
+    client_max_body_size 100M;
+    location /media {
+        alias /home/jurgeon/projects/dunlop/src/media;
+    }
+    location /static {
+        alias /home/jurgeon/projects/dunlop/src/static_root;
+    }
+    location / {
+        uwsgi_pass unix:/home/jurgeon/projects/dunlop/src/config/dunlop.sock;
+        include /etc/nginx/uwsgi_params;
+    }
+
+
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/mydunlop.com.ua/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/mydunlop.com.ua/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+
+}
+
+server{
+    if ($host = mydunlop.com.ua) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    server_name mydunlop.com.ua;
+    client_max_body_size 100M;
+    location /media {
+        alias /home/jurgeon/projects/dunlop/src/media;
+    }
+    location /static {
+        alias /home/jurgeon/projects/dunlop/src/static_root;
+    }
+    location / {
+        uwsgi_pass unix:/home/jurgeon/projects/dunlop/src/config/dunlop.sock;
+        include /etc/nginx/uwsgi_params;
+    }
+
+
+
+}
+
+
+
+
+server{
+    if ($host = mydunlop.com.ua) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    server_name mydunlop.com.ua;
+    listen 80;
+    return 404; # managed by Certbot
+
+
+}
+
+server{
+    server_name www.mydunlop.com.ua;
+    client_max_body_size 100M;
+    location /media {
+        alias /home/jurgeon/projects/dunlop/src/media;
+    }
+    location /static {
+        alias /home/jurgeon/projects/dunlop/src/static_root;
+    }
+    location / {
+        uwsgi_pass unix:/home/jurgeon/projects/dunlop/src/config/dunlop.sock;
+        include /etc/nginx/uwsgi_params;
+    }
+
+
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/www.mydunlop.com.ua/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/www.mydunlop.com.ua/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+
+
+server{
+    if ($host = www.mydunlop.com.ua) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    server_name www.mydunlop.com.ua;
+    listen 80;
+    return 404; # managed by Certbot
+
+
+}

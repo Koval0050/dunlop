@@ -1,0 +1,17 @@
+sudo ln -s /home/jurgeon/projects/dunlop/src/config/dunlop         /etc/nginx/sites-enabled/
+sudo ln -s /home/jurgeon/projects/dunlop/src/config/dunlop.service /etc/systemd/system/
+
+sudo systemctl enable nginx
+sudo systemctl start nginx
+sudo systemctl restart nginx
+# sudo systemctl status nginx
+
+sudo systemctl enable dunlop
+sudo systemctl start dunlop
+sudo systemctl restart dunlop
+# sudo systemctl status dunlop
+
+sudo systemctl daemon-reload
+
+sudo certbot --nginx -d mydunlop.com.ua
+sudo certbot renew --dry-run

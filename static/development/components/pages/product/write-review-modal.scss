@@ -1,0 +1,38 @@
+.write-review-modal {
+  max-width: 500px;
+  background-color: #fff;
+
+  textarea {
+    width: 100%;
+    min-height: 200px;
+    border: none;
+    outline: none;
+  }
+
+  &__title {
+    text-transform: none;
+  }
+
+  &__star-rating {
+    margin: 11px 0 0 11px;
+  }
+
+  .form__field #comment + label {
+    top: 30px;
+
+    &.active {
+      top: -15px;
+    }
+  }
+
+  &__send-btn {
+    width: 100%;
+    padding: 22px 50px;
+  }
+
+  @media (max-width: 480px) {
+    &__close-btn {
+      top: 30px;
+    }
+  }
+}

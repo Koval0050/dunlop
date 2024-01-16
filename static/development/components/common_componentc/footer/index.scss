@@ -1,0 +1,235 @@
+.footer {
+  background-color: black;
+
+  a:hover {
+    color: #737988;
+  }
+
+  &_social {
+    display: flex;
+  }
+
+  &_main {
+    @media (max-width: 1200px) {
+      flex-wrap: wrap;
+    }
+    @media (max-width: 1000px) {
+      display: none;
+    }
+
+    display: flex;
+    // flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+
+  &_mobile {
+    @media (max-width: 1000px) {
+      display: block;
+    }
+
+    display: none;
+    // padding-top: 50px;
+  }
+
+  &_nav {
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+    padding: 10px 15px;
+    width: 100%;
+
+    &_link {
+      text-transform: uppercase;
+      display: flex;
+      cursor: pointer;
+    }
+
+    &__block {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      background: #fff;
+      flex-direction: column;
+    }
+
+    &_content {
+      transition: all 0.2s;
+      visibility: hidden;
+      opacity: 0;
+      max-height: 1px;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      top: 0px;
+      width: fit-content;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 5px 15px;
+      border-radius: 4px;
+      z-index: -1;
+      box-shadow: unset;
+      width: 100%;
+
+      &__block {
+        position: relative;
+
+        &::after {
+          content: "";
+          position: absolute;
+          width: 13px;
+          right: 14px;
+          height: 3px;
+          background: #ffffff;
+          top: 20px;
+        }
+
+        &::before {
+          transition: all 0.2s;
+          content: "";
+          position: absolute;
+          width: 3px;
+          right: 19px;
+          height: 12px;
+          background: #ffffff;
+          top: 15px;
+        }
+
+        // &:hover {
+        //     .footer_nav_content {
+        //         top: 20px;
+        //         opacity: 1;
+        //         z-index: 9;
+        //         visibility: visible;
+        //         max-height: 1000px;
+        //     }
+        // }
+        &.active {
+          .footer_nav_content {
+            top: 0;
+            opacity: 1;
+            z-index: 9;
+            visibility: visible;
+            max-height: 1000px;
+          }
+
+          &::before {
+            opacity: 0;
+          }
+        }
+      }
+
+      &_link {
+        display: flex;
+        margin: 10px 0;
+      }
+    }
+  }
+
+  &__bottom {
+    padding-bottom: 30px;
+  }
+
+  &__column {
+    padding: 50px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__item {
+    @media (max-width: 1400px) {
+      font-size: 15px;
+    }
+    @media (max-width: 1000px) {
+      margin-bottom: 0px;
+    }
+
+    color: white;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 23px;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin-bottom: 20px;
+
+    span,
+    a {
+      @media (max-width: 1000px) {
+        margin-right: 0px;
+      }
+      color: white;
+      margin-right: 20px;
+    }
+  }
+
+  &__tel {
+    display: flex;
+    flex-direction: column;
+
+    a {
+      color: white;
+    }
+  }
+}
+
+.copiright {
+  @media (max-width: 1000px) {
+    display: none;
+  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: #ffffff;
+  background: #272c35;
+  padding: 8px 0;
+
+  &_sw {
+    span {
+      margin-right: 20px;
+    }
+    margin-right: 200px;
+  }
+
+  &_text {
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+  }
+
+  &_mob {
+    width: 180px;
+    font-size: 10px;
+    line-height: 12px;
+    font-style: normal;
+    font-weight: 500;
+    color: #ffffff;
+  }
+}
+
+@media (max-width: 1500px) {
+  .footer > .container {
+    padding: 0;
+  }
+  .footer__column {
+    padding: 30px;
+  }
+}
+@media (max-width: 1000px) {
+  .footer__column {
+    padding: 10px;
+    a {
+      margin-bottom: 10px;
+    }
+  }
+}
