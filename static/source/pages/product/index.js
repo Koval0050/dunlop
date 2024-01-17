@@ -29132,6 +29132,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _swiper_scss__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_swiper_scss__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _write_review_modal_scss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./write-review-modal.scss */ "../components/pages/product/write-review-modal.scss");
 /* harmony import */ var _write_review_modal_scss__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_write_review_modal_scss__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _product__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./product */ "../components/pages/product/product.js");
+// SCSS
 
 
 
@@ -29140,6 +29142,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+// SCRIPTS
 
 
 
@@ -29155,6 +29161,71 @@ __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
     if(false) { var cssReload; }
   
+
+/***/ }),
+
+/***/ "../components/pages/product/product.js":
+/*!**********************************************!*\
+  !*** ../components/pages/product/product.js ***!
+  \**********************************************/
+/*! exports provided: checkboxState */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "checkboxState", function() { return checkboxState; });
+/* harmony import */ var _common_componentc_header_cart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../common_componentc/header/cart */ "../components/common_componentc/header/cart.js");
+/* harmony import */ var _module_form_action__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../module/form_action */ "../components/module/form_action/index.js");
+
+
+
+//checkbox
+var checboxColor = document.querySelector(".product__checkbox-colors input");
+var checboxSize = document.querySelector(".product__checkbox-sizes input");
+var checkboxState = {
+  color: {
+    id: checboxColor === null || checboxColor === void 0 ? void 0 : checboxColor.id,
+    title: checboxColor === null || checboxColor === void 0 ? void 0 : checboxColor.dataset.title
+  },
+  size: {
+    id: checboxSize === null || checboxSize === void 0 ? void 0 : checboxSize.id,
+    title: checboxSize === null || checboxSize === void 0 ? void 0 : checboxSize.dataset.title
+  }
+};
+console.log(checkboxState);
+
+//func change checkBox
+var checkboxItems = document.querySelector(".product__checkbox-items");
+checkboxItems.addEventListener("click", function (e) {
+  var checkbox = e.target.closest(".product__checkbox");
+  var checkboxInput = e.target.closest(".product__checkbox input");
+  var checkboxLabelSpan = checkbox.querySelector("label span");
+  if (checkboxInput) {
+    checkboxLabelSpan.textContent = e.target.dataset.title;
+    if (checkbox.closest(".product__checkbox-colors")) {
+      checkboxState.color = {
+        id: e.target.id,
+        title: e.target.dataset.title
+      };
+    }
+    if (checkbox.closest(".product__checkbox-sizes")) {
+      checkboxState.size = {
+        id: e.target.id,
+        title: e.target.dataset.title
+      };
+    }
+  }
+});
+
+//open quick shop
+var qucklyShopBtn = document.querySelector(".product__buy-btn");
+qucklyShopBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+  Object(_module_form_action__WEBPACK_IMPORTED_MODULE_1__["form_send"])(".quckly_shop_form-product", false, {
+    product_color: checkboxState.color.id,
+    product_size: checkboxState.size.id
+  });
+});
 
 /***/ }),
 
