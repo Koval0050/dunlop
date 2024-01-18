@@ -15,7 +15,6 @@ export const checkboxState = {
     title: checboxSize?.dataset.title,
   },
 };
-console.log(checkboxState);
 
 //func change checkBox
 const checkboxItems = document.querySelector(".product__checkbox-items");
@@ -53,3 +52,44 @@ qucklyShopBtn.addEventListener("click", (e) => {
     product_size: checkboxState.size.id,
   });
 });
+
+const checkboxModal = document.querySelector(".checkbox-modal");
+
+const openCheckboxModal = () => {
+  checkboxModal.closest(".overlay").classList.add("active");
+  checkboxModal.classList.add("active");
+};
+
+//add to cart
+const addToCartBtn = document.querySelector(".product__add-to-cart-btn");
+addToCartBtn.addEventListener("click", () => {
+  const id = addToCartBtn.dataset.id;
+  const name = addToCartBtn.dataset.title;
+  const price = addToCartBtn.dataset.price;
+  const product = {
+    id,
+    count: 1,
+    name,
+    price,
+    ...checkboxState,
+  };
+
+  if (checkboxState.color.id) {
+    console.log(addToCartFunc);
+    addToCartFunc(product);
+  } else {
+    openCheckboxModal();
+  }
+});
+
+//open specification
+const specificationsHead = document.querySelector(
+  ".product__details-specifications-head"
+);
+const specificationsBody = document.querySelector(
+  ".product__details-specifications-body"
+);
+
+specificationsHead.addEventListener("click", () =>
+  specificationsBody.classList.toggle("active")
+);
