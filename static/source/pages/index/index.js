@@ -27455,6 +27455,126 @@ var instance = axios__WEBPACK_IMPORTED_MODULE_0__["default"].create({
 
 /***/ }),
 
+/***/ "../api/order.js":
+/*!***********************!*\
+  !*** ../api/order.js ***!
+  \***********************/
+/*! exports provided: sendOrder, getCities, getDepartments */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sendOrder", function() { return sendOrder; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCities", function() { return getCities; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDepartments", function() { return getDepartments; });
+/* harmony import */ var _instance__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./instance */ "../api/instance.js");
+/* harmony import */ var _components_pages_order_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/pages/order/form */ "../components/pages/order/form.js");
+/* harmony import */ var _components_pages_order__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/pages/order */ "../components/pages/order/index.js");
+/* harmony import */ var _components_module_form_action__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/module/form_action */ "../components/module/form_action/index.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw new Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw new Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+
+function sendOrder(_x) {
+  return _sendOrder.apply(this, arguments);
+}
+function _sendOrder() {
+  _sendOrder = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(formData) {
+    var _yield$instance$post, data, _error$response;
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          _context.prev = 0;
+          document.querySelector(".modal_loading__block").classList.add("active");
+          _context.next = 4;
+          return _instance__WEBPACK_IMPORTED_MODULE_0__["instance"].post("/api/make_order/", formData);
+        case 4:
+          _yield$instance$post = _context.sent;
+          data = _yield$instance$post.data;
+          if ((data === null || data === void 0 ? void 0 : data.url) === "/payment/") {
+            window.location.href = data.url;
+          } else {
+            Object(_components_pages_order__WEBPACK_IMPORTED_MODULE_2__["openThanksPopUp"])();
+          }
+          return _context.abrupt("return", data);
+        case 10:
+          _context.prev = 10;
+          _context.t0 = _context["catch"](0);
+          console.log(_context.t0);
+          Object(_components_module_form_action__WEBPACK_IMPORTED_MODULE_3__["bad_modal"])(_context.t0 === null || _context.t0 === void 0 || (_error$response = _context.t0.response) === null || _error$response === void 0 || (_error$response = _error$response.data) === null || _error$response === void 0 ? void 0 : _error$response.detail);
+        case 14:
+        case "end":
+          return _context.stop();
+      }
+    }, _callee, null, [[0, 10]]);
+  }));
+  return _sendOrder.apply(this, arguments);
+}
+function getCities(_x2) {
+  return _getCities.apply(this, arguments);
+}
+function _getCities() {
+  _getCities = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(city) {
+    var _yield$instance$get, data;
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.prev = 0;
+          _context2.next = 3;
+          return _instance__WEBPACK_IMPORTED_MODULE_0__["instance"].get("/api/settlements/?q=".concat(city));
+        case 3:
+          _yield$instance$get = _context2.sent;
+          data = _yield$instance$get.data;
+          Object(_components_pages_order_form__WEBPACK_IMPORTED_MODULE_1__["renderSelectItems"])(data.results, ".select-city");
+          return _context2.abrupt("return", data === null || data === void 0 ? void 0 : data.results);
+        case 9:
+          _context2.prev = 9;
+          _context2.t0 = _context2["catch"](0);
+          console.log(_context2.t0);
+        case 12:
+        case "end":
+          return _context2.stop();
+      }
+    }, _callee2, null, [[0, 9]]);
+  }));
+  return _getCities.apply(this, arguments);
+}
+function getDepartments(_x3) {
+  return _getDepartments.apply(this, arguments);
+}
+function _getDepartments() {
+  _getDepartments = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(department) {
+    var _yield$instance$get2, data;
+    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      while (1) switch (_context3.prev = _context3.next) {
+        case 0:
+          _context3.prev = 0;
+          _context3.next = 3;
+          return _instance__WEBPACK_IMPORTED_MODULE_0__["instance"].get("/api/warehouses/?q=".concat(department));
+        case 3:
+          _yield$instance$get2 = _context3.sent;
+          data = _yield$instance$get2.data;
+          Object(_components_pages_order_form__WEBPACK_IMPORTED_MODULE_1__["renderSelectItems"])(data, ".select-department");
+          return _context3.abrupt("return", data);
+        case 9:
+          _context3.prev = 9;
+          _context3.t0 = _context3["catch"](0);
+          console.log(_context3.t0);
+        case 12:
+        case "end":
+          return _context3.stop();
+      }
+    }, _callee3, null, [[0, 9]]);
+  }));
+  return _getDepartments.apply(this, arguments);
+}
+
+/***/ }),
+
 /***/ "../components/common_componentc/footer/index.js":
 /*!*******************************************************!*\
   !*** ../components/common_componentc/footer/index.js ***!
@@ -28063,6 +28183,69 @@ __webpack_require__.r(__webpack_exports__);
 /*!***********************************************!*\
   !*** ../components/interface/grid/index.scss ***!
   \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+    if(false) { var cssReload; }
+  
+
+/***/ }),
+
+/***/ "../components/module/custom_select/index.js":
+/*!***************************************************!*\
+  !*** ../components/module/custom_select/index.js ***!
+  \***************************************************/
+/*! exports provided: customSelectFunc */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "customSelectFunc", function() { return customSelectFunc; });
+/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.scss */ "../components/module/custom_select/index.scss");
+/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_0__);
+
+var customSelectFunc = function customSelectFunc(className) {
+  var customSelect = document.querySelector(className);
+  var headCustomSelect = customSelect.querySelector(".custom-select__head");
+  var inputHeadCustomSelect = headCustomSelect.querySelector("input");
+  var toogleSelect = function toogleSelect() {
+    customSelect.classList.toggle("active");
+  };
+  var closeSelect = function closeSelect() {
+    customSelect.classList.remove("active");
+  };
+  customSelect.addEventListener("click", function (_ref) {
+    var target = _ref.target;
+    var allListItems = customSelect.querySelectorAll(".custom-select__list-item");
+    var listItem = target.closest(".custom-select__list-item");
+    if (target.closest(".custom-select__head")) {
+      toogleSelect();
+    }
+    if (listItem) {
+      allListItems.forEach(function (item) {
+        item.classList.remove("active");
+      });
+      inputHeadCustomSelect.value = listItem.textContent;
+      inputHeadCustomSelect.dataset.listItemId = listItem === null || listItem === void 0 ? void 0 : listItem.id;
+      listItem.classList.add("active");
+      closeSelect();
+    }
+  });
+  document.addEventListener("click", function (e) {
+    var path = (e === null || e === void 0 ? void 0 : e.path) || (e === null || e === void 0 ? void 0 : e.composedPath) && (e === null || e === void 0 ? void 0 : e.composedPath());
+    if (!path.includes(customSelect)) {
+      closeSelect();
+    }
+  });
+};
+
+/***/ }),
+
+/***/ "../components/module/custom_select/index.scss":
+/*!*****************************************************!*\
+  !*** ../components/module/custom_select/index.scss ***!
+  \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -29375,6 +29558,54 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "../components/pages/order/form.js":
+/*!*****************************************!*\
+  !*** ../components/pages/order/form.js ***!
+  \*****************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _module_custom_select__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../module/custom_select */ "../components/module/custom_select/index.js");
+/* harmony import */ var _api_order__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../api/order */ "../api/order.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+
+
+
+var orderForm = document.querySelector(".order__form");
+if (orderForm) {
+  Object(_module_custom_select__WEBPACK_IMPORTED_MODULE_0__["customSelectFunc"])(".select-city");
+  Object(_module_custom_select__WEBPACK_IMPORTED_MODULE_0__["customSelectFunc"])(".select-department");
+  Object(_api_order__WEBPACK_IMPORTED_MODULE_1__["getCities"])("а");
+}
+
+// Перенесення лейблу при введені тексту
+var allContactFieldsInputs = document.querySelectorAll(".form__contacts-field input");
+var allContactFieldsTextarea = document.querySelectorAll(".form__contacts-field textarea");
+var allDropdownBlocksInput = document.querySelectorAll(".dropdown-block input");
+var allDropdownBlocksTextarea = document.querySelectorAll(".dropdown-block textarea");
+var allFormFields = [].concat(_toConsumableArray(allContactFieldsInputs), _toConsumableArray(allContactFieldsTextarea), _toConsumableArray(allDropdownBlocksInput), _toConsumableArray(allDropdownBlocksTextarea));
+console.log(allFormFields);
+allFormFields.forEach(function (item) {
+  var fieldLabel = document.querySelector("[for=".concat(item.id, "]"));
+  item.addEventListener("input", function (_ref) {
+    var target = _ref.target;
+    if (target.value.length < 1) {
+      fieldLabel.classList.remove("active");
+    } else {
+      fieldLabel.classList.add("active");
+    }
+  });
+});
+
+/***/ }),
+
 /***/ "../components/pages/order/form.scss":
 /*!*******************************************!*\
   !*** ../components/pages/order/form.scss ***!
@@ -29392,11 +29623,16 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************************************!*\
   !*** ../components/pages/order/index.js ***!
   \******************************************/
-/*! no exports provided */
+/*! exports provided: updateOrderTotalCount, updateOrderTotalPrice, renderOrderItems, updateOrder, openThanksPopUp */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateOrderTotalCount", function() { return updateOrderTotalCount; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateOrderTotalPrice", function() { return updateOrderTotalPrice; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "renderOrderItems", function() { return renderOrderItems; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateOrder", function() { return updateOrder; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "openThanksPopUp", function() { return openThanksPopUp; });
 /* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.scss */ "../components/pages/order/index.scss");
 /* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _form_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./form.scss */ "../components/pages/order/form.scss");
@@ -29405,10 +29641,62 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _summary_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_summary_scss__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _thank_you_pop_up_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./thank-you-pop-up.scss */ "../components/pages/order/thank-you-pop-up.scss");
 /* harmony import */ var _thank_you_pop_up_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_thank_you_pop_up_scss__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _form__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./form */ "../components/pages/order/form.js");
 
 
 
 
+
+//script
+
+
+//update cart total count
+var updateOrderTotalCount = function updateOrderTotalCount(totalCount) {
+  var orderTotalCount = document.querySelector(".summary__subtotal-title span");
+  var countTitle = totalCount === 1 ? "1 товар" : "".concat(totalCount, " \u0442\u043E\u0432\u0430\u0440\u0438");
+  orderTotalCount.textContent = countTitle;
+};
+
+//update cart total price
+var updateOrderTotalPrice = function updateOrderTotalPrice(totalPrice) {
+  var orderTotalPrice = document.querySelector(".summary__subtotal-price span");
+  var orderTotalCost = document.querySelector(".summary__total-cost-number");
+  orderTotalPrice.textContent = totalPrice;
+  orderTotalCost.textContent = totalPrice;
+};
+
+// render Order Items
+var orderItems = document.querySelector(".summary__items");
+var renderOrderItem = function renderOrderItem(_ref) {
+  var id = _ref.id,
+    product_color = _ref.product_color,
+    product_size = _ref.product_size,
+    quantity = _ref.quantity,
+    total_price = _ref.total_price,
+    product = _ref.product;
+  var productQuantity = quantity === 1 ? "1 пара" : "".concat(quantity, " \u043F\u0430\u0440\u0438");
+  return "<div data-id=".concat(id, " product-id=\"").concat(product.id, "\" class=\"summary__item\">\n            <div class=\"summary__item-img\">\n              <img\n                src=\"").concat(product.image, "\"\n                alt=\"").concat(product.title, "\"\n              />\n              <span class=\"badge summary__item-badge\"\n                >").concat(quantity, "</span\n              >\n            </div>\n\n            <div class=\"summary__item-info\">\n              <div class=\"summary__item-info-left\">\n                <h4 class=\"title summary__item-title\">\n                  ").concat(product.title, "\n                </h4>\n                <div class=\"summary__item-params\">\n                  <p>\u041A\u043E\u043B\u0456\u0440:<span>").concat(product_color.title, "</span></p>\n                  <p>\u0420\u043E\u0437\u043C\u0456\u0440:<span>").concat(product_size.title, "</span></p>\n                </div>\n                <p class=\"summary__item-count\">\n                  ").concat(productQuantity, "\n                </p>\n              </div>\n\n              <div class=\"summary__item-info-right\">\n                <p class=\"summary__item-price\">\n                  <span>").concat(total_price, "</span>\u20B4\n                </p>\n              </div>\n            </div>\n          </div>");
+};
+var renderOrderItems = function renderOrderItems(currentOrderItems) {
+  var newOrderItems = currentOrderItems === null || currentOrderItems === void 0 ? void 0 : currentOrderItems.map(function (item) {
+    return renderOrderItem(item);
+  });
+  if (newOrderItems) {
+    orderItems.innerHTML = newOrderItems.join("");
+  }
+};
+var updateOrder = function updateOrder(totalCount, totalPrice, currentOrderItems) {
+  if (orderItems) {
+    updateOrderTotalCount(totalCount);
+    updateOrderTotalPrice(totalPrice);
+    renderOrderItems(currentOrderItems);
+  }
+};
+var openThanksPopUp = function openThanksPopUp() {
+  document.querySelector(".thank-you-pop-up-overlay").classList.add("active");
+  document.querySelector(".thank-you-pop-up").classList.add("active");
+  document.querySelector(".modal_loading__block").classList.remove("active");
+};
 
 /***/ }),
 

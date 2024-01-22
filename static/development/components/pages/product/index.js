@@ -15,3 +15,4 @@ import "./write-review-modal.scss";
 // SCRIPTS
 
 import "./product";
+import './reviews'
