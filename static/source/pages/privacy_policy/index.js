@@ -29416,6 +29416,7 @@ allContactFieldsInputs.forEach(function (item) {
   });
 });
 
+//цю функцію я скопіпастив бо без неї в консольці сипались помилки а де її використовувати на практиці я не знайшов. Сорі)
 // render select items, отримання міст та відділень та їх додаванно до списку
 var renderSelectItem = function renderSelectItem(_ref2) {
   var id = _ref2.id,

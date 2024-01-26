@@ -27,6 +27,7 @@ allContactFieldsInputs.forEach((item) => {
 });
 
 
+//цю функцію я скопіпастив бо без неї в консольці сипались помилки а де її використовувати на практиці я не знайшов. Сорі)
 // render select items, отримання міст та відділень та їх додаванно до списку
 const renderSelectItem = ({ id, title }) => {
   return `<li id=${id} class="custom-select__list-item">${title}</li>`;

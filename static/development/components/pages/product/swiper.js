@@ -11,17 +11,17 @@ export const reviewsSwiper = new Swiper(".reviews-swiper", {
     pauseOnMouseEnter: true,
     disableOnInteraction: false,
   },
-  //   breakpoints: {
-  //     0: {
-  //       slidesPerView: 1,
-  //     },
+  breakpoints: {
+    0: {
+      slidesPerView: 1,
+    },
 
-  //     830: {
-  //       slidesPerView: 2,
-  //     },
+    830: {
+      slidesPerView: 2,
+    },
 
-  //     1150: {
-  //       slidesPerView: 3,
-  //     },
-  //   },
+    1150: {
+      slidesPerView: 3,
+    },
+  },
 });
