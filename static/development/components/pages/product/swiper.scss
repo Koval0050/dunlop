@@ -6,6 +6,15 @@
   overflow: hidden;
 }
 
+.reviews-swiper {
+  max-width: 1240px;
+  // overflow: hidden;
+}
+
+.reviews__item {
+  max-width: 400px;
+}
+
 .media-swiper {
   @media (min-width: 901px) {
     display: none;

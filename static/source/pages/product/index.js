@@ -18530,6 +18530,19 @@ function createElementIfNotDefined($container, params, createElements, checkProp
 
 /***/ }),
 
+/***/ "../../node_modules/swiper/swiper-bundle.min.css":
+/*!***************************************************************************!*\
+  !*** D:/projects/dunlop/static/node_modules/swiper/swiper-bundle.min.css ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+    if(false) { var cssReload; }
+  
+
+/***/ }),
+
 /***/ "../../node_modules/swiper/swiper.esm.js":
 /*!*******************************************************************!*\
   !*** D:/projects/dunlop/static/node_modules/swiper/swiper.esm.js ***!
@@ -29985,6 +29998,46 @@ sendBtn.addEventListener("click", /*#__PURE__*/function () {
 
 /***/ }),
 
+/***/ "../components/pages/product/swiper.js":
+/*!*********************************************!*\
+  !*** ../components/pages/product/swiper.js ***!
+  \*********************************************/
+/*! exports provided: reviewsSwiper */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reviewsSwiper", function() { return reviewsSwiper; });
+/* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! swiper */ "../../node_modules/swiper/swiper.esm.js");
+/* harmony import */ var swiper_swiper_bundle_min_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! swiper/swiper-bundle.min.css */ "../../node_modules/swiper/swiper-bundle.min.css");
+/* harmony import */ var swiper_swiper_bundle_min_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(swiper_swiper_bundle_min_css__WEBPACK_IMPORTED_MODULE_1__);
+
+
+var reviewsSwiper = new swiper__WEBPACK_IMPORTED_MODULE_0__["default"](".reviews-swiper", {
+  modules: [swiper__WEBPACK_IMPORTED_MODULE_0__["Autoplay"]],
+  slidesPerView: "auto",
+  spaceBetween: 20,
+  loop: true,
+  autoplay: {
+    delay: 4000,
+    pauseOnMouseEnter: true,
+    disableOnInteraction: false
+  }
+  // breakpoints: {
+  //   0: {
+  //     slidesPerView: 1,
+  //   },
+  //   830: {
+  //     slidesPerView: 2,
+  //   },
+  //   1150: {
+  //     slidesPerView: 3,
+  //   },
+  // },
+});
+
+/***/ }),
+
 /***/ "../components/pages/product/swiper.scss":
 /*!***********************************************!*\
   !*** ../components/pages/product/swiper.scss ***!
@@ -30035,6 +30088,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_common_componentc_footer_index__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/common_componentc/footer/index */ "../components/common_componentc/footer/index.js");
 /* harmony import */ var _components_module_validation_index__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../components/module/validation/index */ "../components/module/validation/index.js");
 /* harmony import */ var _components_pages_product_index__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../components/pages/product/index */ "../components/pages/product/index.js");
+/* harmony import */ var _components_pages_product_swiper__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../components/pages/product/swiper */ "../components/pages/product/swiper.js");
+/* harmony import */ var _components_pages_product_product__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../components/pages/product/product */ "../components/pages/product/product.js");
 // script interface
 
 
@@ -30056,6 +30111,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // import "../components/common_componentc/form_action/index";
+
+
 
 
 

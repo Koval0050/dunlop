@@ -21,3 +21,5 @@ import "../components/module/validation/index";
 // import "../components/common_componentc/form_action/index";
 
 import "../components/pages/product/index";
+import "../components/pages/product/swiper";
+import "../components/pages/product/product";
