@@ -22,3 +22,4 @@ import "../components/module/validation/index";
 import "../components/module/form_action/index";
 
 import "../components/pages/order/index";
+import "../components/pages/order/form";// Чому цей імпорт не працює ?

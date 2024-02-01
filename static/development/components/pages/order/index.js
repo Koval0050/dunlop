@@ -4,7 +4,7 @@ import "./summary.scss";
 import "./thank-you-pop-up.scss";
 
 //script
-import'./form'
+import './form'
 
 //update cart total count
 export const updateOrderTotalCount = (totalCount) => {

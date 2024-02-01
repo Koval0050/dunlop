@@ -29585,24 +29585,98 @@ if (orderForm) {
 }
 
 // Перенесення лейблу при введені тексту
+function moveItputsLable(target, inputsLabel) {
+  if (target.value.length < 1) {
+    inputsLabel.classList.remove("active");
+  } else {
+    inputsLabel.classList.add("active");
+  }
+}
 var allContactFieldsInputs = document.querySelectorAll(".form__field-input");
 allContactFieldsInputs.forEach(function (item) {
   var inputsLabel = document.querySelector("[for=".concat(item.id, "]"));
-  item.addEventListener("input", function (_ref) {
-    var target = _ref.target;
-    if (target.value.length < 1) {
-      inputsLabel.classList.remove("active");
-    } else {
-      inputsLabel.classList.add("active");
-    }
+  item.addEventListener("input", function (e) {
+    moveItputsLable(e.target, inputsLabel);
+  });
+
+  // item.addEventListener("input", ({ target }) => {
+  //   if (target.value.length < 1) {
+  //     inputsLabel.classList.remove("active");
+  //   } else {
+  //     inputsLabel.classList.add("active");
+  //   }
+  // });
+});
+var allOrderFieldsInputs = document.querySelectorAll(".validation_input");
+allOrderFieldsInputs.forEach(function (item) {
+  item.removeAttribute("readonly");
+  var inputsLabel = document.querySelector("[for=".concat(item.id, "]"));
+  item.addEventListener("input", function (e) {
+    moveItputsLable(e.target, inputsLabel);
+  });
+});
+var allOrderFieldsTextArea = document.querySelectorAll(".form__delivery-checkbox textarea");
+allOrderFieldsTextArea.forEach(function (item) {
+  var inputsLabel = document.querySelector("[for=".concat(item.id, "]"));
+  item.addEventListener("input", function (e) {
+    moveItputsLable(e.target, inputsLabel);
   });
 });
 
-//цю функцію я скопіпастив бо без неї в консольці сипались помилки а де її використовувати на практиці я не знайшов. Сорі)
+//Слухач для відстеженя способу доставки
+if (orderForm) {
+  var allDeliveryCheckbox = document.querySelectorAll(".form__delivery-checkbox input[type='radio']");
+  allDeliveryCheckbox.forEach(function (checkbox) {
+    checkbox.addEventListener("click", function () {
+      // Знімаємо клас "active" з усіх елементів
+      allDeliveryCheckbox.forEach(function (el) {
+        el.closest(".form__delivery-checkbox").classList.remove("active");
+      });
+
+      // Додаємо клас "active" тільки для вибраного елемента
+      this.closest(".form__delivery-checkbox").classList.add("active");
+    });
+  });
+}
+
+//Слухач для відстеження способу оплати
+var paymentType = document.getElementById("cash-payment");
+if (orderForm) {
+  var allPaymentType = document.querySelectorAll(".form__payment-checkbox input");
+  allPaymentType.forEach(function (item) {
+    item.addEventListener("click", function () {
+      paymentType = item.id;
+    });
+  });
+}
+
+//формуємо дані для замовлення
+function createFormData() {
+  var formData = {
+    name: document.getElementById("firstName").value,
+    surname: document.getElementById("lastName").value,
+    phone: document.getElementById("tel").value,
+    email: document.getElementById("email").value,
+    city: document.querySelector("#city input").dataset.listItemId || "",
+    department: document.querySelector("#department input").dataset.listItemId || "",
+    address: document.getElementById("address").value || "",
+    message: document.getElementById("message").value || "",
+    paymentType: paymentType
+  };
+  return formData;
+}
+//Відправка замовлення
+var submitBtn = document.querySelector(".summary__confirm-btn");
+submitBtn.addEventListener("click", function () {
+  var data = createFormData();
+  console.log("send Order - ", data);
+  Object(_api_order__WEBPACK_IMPORTED_MODULE_1__["sendOrder"])(data);
+});
+
 // render select items, отримання міст та відділень та їх додаванно до списку
-var renderSelectItem = function renderSelectItem(_ref2) {
-  var id = _ref2.id,
-    title = _ref2.title;
+var renderSelectItem = function renderSelectItem(_ref) {
+  var id = _ref.id,
+    title = _ref.title;
   return "<li id=".concat(id, " class=\"custom-select__list-item\">").concat(title, "</li>");
 };
 var renderSelectItems = function renderSelectItems(items, classNameSelect) {
@@ -29620,12 +29694,12 @@ var renderSelectItems = function renderSelectItems(items, classNameSelect) {
 if (orderForm) {
   var selectCity = orderForm.querySelector(".select-city");
   var selectCityInput = selectCity.querySelector("input");
-  selectCityInput.addEventListener("input", function (_ref3) {
-    var target = _ref3.target;
+  selectCityInput.addEventListener("input", function (_ref2) {
+    var target = _ref2.target;
     return Object(_api_order__WEBPACK_IMPORTED_MODULE_1__["getCities"])(target.value);
   });
-  selectCity.addEventListener("click", function (_ref4) {
-    var target = _ref4.target;
+  selectCity.addEventListener("click", function (_ref3) {
+    var target = _ref3.target;
     if (target.closest(".custom-select__list-item")) {
       Object(_api_order__WEBPACK_IMPORTED_MODULE_1__["getDepartments"])(target.id);
     }
@@ -29633,12 +29707,12 @@ if (orderForm) {
   var selectDepartment = orderForm.querySelector(".select-department");
   var selectDepartmentInput = selectDepartment.querySelector("input");
   selectDepartmentInput.addEventListener("input", /*#__PURE__*/function () {
-    var _ref6 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(_ref5) {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(_ref4) {
       var target, resetExtraSymbols, searchValue, departments, filteredDepartments;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
-            target = _ref5.target;
+            target = _ref4.target;
             resetExtraSymbols = function resetExtraSymbols(str) {
               return str.toLocaleLowerCase().replaceAll("нова пошта", "").replaceAll("вулиця", "").replaceAll("вул", "").replaceAll("№", "").replaceAll('"', "").replaceAll(":", "").replaceAll("(", "").replaceAll(")", "").replaceAll(".", "").replaceAll(",", "").replaceAll(" ", "");
             };
@@ -29659,7 +29733,7 @@ if (orderForm) {
       }, _callee);
     }));
     return function (_x) {
-      return _ref6.apply(this, arguments);
+      return _ref5.apply(this, arguments);
     };
   }());
 }
