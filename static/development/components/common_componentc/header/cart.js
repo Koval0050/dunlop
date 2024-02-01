@@ -99,10 +99,8 @@ export const addToCartFunc = async ({
 }) => {
   await addToCart({
     product: id,
-    product_title: name,
     product_color: color.id,
     product_size: size.id,
-    product_price: price,
     quantity: count,
   });
 

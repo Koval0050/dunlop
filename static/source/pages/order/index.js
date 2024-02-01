@@ -15533,10 +15533,8 @@ var addToCartFunc = /*#__PURE__*/function () {
           _context.next = 3;
           return Object(_api_cart__WEBPACK_IMPORTED_MODULE_1__["addToCart"])({
             product: id,
-            product_title: name,
             product_color: color.id,
             product_size: size.id,
-            product_price: price,
             quantity: count
           });
         case 3:
