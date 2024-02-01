@@ -80,7 +80,7 @@ if (orderForm) {
 }
 
 //Слухач для відстеження способу оплати
-let paymentType = document.getElementById("cash-payment");
+let payment_type = document.getElementById("cash-payment");
 if (orderForm) {
   const allPaymentType = document.querySelectorAll(
     ".form__payment-checkbox input"
@@ -88,7 +88,7 @@ if (orderForm) {
 
   allPaymentType.forEach((item) => {
     item.addEventListener("click", () => {
-      paymentType = item.id;
+      payment_type = item.id;
     });
   });
 }
@@ -100,12 +100,12 @@ function createFormData() {
     surname: document.getElementById("lastName").value,
     phone: document.getElementById("tel").value,
     email: document.getElementById("email").value,
-    city: document.querySelector("#city input").dataset.listItemId || "",
-    department:
+    settlement: document.querySelector("#city input").dataset.listItemId || "",
+    warehouse:
       document.querySelector("#department input").dataset.listItemId || "",
     address: document.getElementById("address").value || "",
     message: document.getElementById("message").value || "",
-    paymentType,
+    payment_type,
   };
   return formData;
 }
@@ -116,7 +116,7 @@ if (orderForm) {
     const data = createFormData();
 
     console.log("send Order - ", data);
-    // sendOrder(data);
+    sendOrder(data);
   });
 }
 
