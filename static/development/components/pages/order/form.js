@@ -19,44 +19,46 @@ function moveItputsLable(target, inputsLabel) {
     inputsLabel.classList.add("active");
   }
 }
+if (orderForm) {
+  const allContactFieldsInputs =
+    document.querySelectorAll(".form__field-input");
+  allContactFieldsInputs.forEach((item) => {
+    const inputsLabel = document.querySelector(`[for=${item.id}]`);
 
-const allContactFieldsInputs = document.querySelectorAll(".form__field-input");
-allContactFieldsInputs.forEach((item) => {
-  const inputsLabel = document.querySelector(`[for=${item.id}]`);
+    item.addEventListener("input", (e) => {
+      moveItputsLable(e.target, inputsLabel);
+    });
 
-  item.addEventListener("input", (e) => {
-    moveItputsLable(e.target, inputsLabel);
+    // item.addEventListener("input", ({ target }) => {
+    //   if (target.value.length < 1) {
+    //     inputsLabel.classList.remove("active");
+    //   } else {
+    //     inputsLabel.classList.add("active");
+    //   }
+    // });
   });
 
-  // item.addEventListener("input", ({ target }) => {
-  //   if (target.value.length < 1) {
-  //     inputsLabel.classList.remove("active");
-  //   } else {
-  //     inputsLabel.classList.add("active");
-  //   }
-  // });
-});
+  const allOrderFieldsInputs = document.querySelectorAll(".validation_input");
+  allOrderFieldsInputs.forEach((item) => {
+    item.removeAttribute("readonly");
+    const inputsLabel = document.querySelector(`[for=${item.id}]`);
 
-const allOrderFieldsInputs = document.querySelectorAll(".validation_input");
-allOrderFieldsInputs.forEach((item) => {
-  item.removeAttribute("readonly");
-  const inputsLabel = document.querySelector(`[for=${item.id}]`);
-
-  item.addEventListener("input", (e) => {
-    moveItputsLable(e.target, inputsLabel);
+    item.addEventListener("input", (e) => {
+      moveItputsLable(e.target, inputsLabel);
+    });
   });
-});
 
-const allOrderFieldsTextArea = document.querySelectorAll(
-  ".form__delivery-checkbox textarea"
-);
-allOrderFieldsTextArea.forEach((item) => {
-  const inputsLabel = document.querySelector(`[for=${item.id}]`);
+  const allOrderFieldsTextArea = document.querySelectorAll(
+    ".form__delivery-checkbox textarea"
+  );
+  allOrderFieldsTextArea.forEach((item) => {
+    const inputsLabel = document.querySelector(`[for=${item.id}]`);
 
-  item.addEventListener("input", (e) => {
-    moveItputsLable(e.target, inputsLabel);
+    item.addEventListener("input", (e) => {
+      moveItputsLable(e.target, inputsLabel);
+    });
   });
-});
+}
 
 //Слухач для відстеженя способу доставки
 if (orderForm) {
@@ -107,14 +109,16 @@ function createFormData() {
   };
   return formData;
 }
-//Відправка замовлення
-const submitBtn = document.querySelector(".summary__confirm-btn");
-submitBtn.addEventListener("click", () => {
-  const data = createFormData();
+if (orderForm) {
+  //Відправка замовлення
+  const submitBtn = document.querySelector(".summary__confirm-btn");
+  submitBtn.addEventListener("click", () => {
+    const data = createFormData();
 
-  console.log("send Order - ", data);
-  sendOrder(data);
-});
+    console.log("send Order - ", data);
+    // sendOrder(data);
+  });
+}
 
 // render select items, отримання міст та відділень та їх додаванно до списку
 const renderSelectItem = ({ id, title }) => {

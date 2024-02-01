@@ -29526,36 +29526,38 @@ function moveItputsLable(target, inputsLabel) {
     inputsLabel.classList.add("active");
   }
 }
-var allContactFieldsInputs = document.querySelectorAll(".form__field-input");
-allContactFieldsInputs.forEach(function (item) {
-  var inputsLabel = document.querySelector("[for=".concat(item.id, "]"));
-  item.addEventListener("input", function (e) {
-    moveItputsLable(e.target, inputsLabel);
-  });
+if (orderForm) {
+  var allContactFieldsInputs = document.querySelectorAll(".form__field-input");
+  allContactFieldsInputs.forEach(function (item) {
+    var inputsLabel = document.querySelector("[for=".concat(item.id, "]"));
+    item.addEventListener("input", function (e) {
+      moveItputsLable(e.target, inputsLabel);
+    });
 
-  // item.addEventListener("input", ({ target }) => {
-  //   if (target.value.length < 1) {
-  //     inputsLabel.classList.remove("active");
-  //   } else {
-  //     inputsLabel.classList.add("active");
-  //   }
-  // });
-});
-var allOrderFieldsInputs = document.querySelectorAll(".validation_input");
-allOrderFieldsInputs.forEach(function (item) {
-  item.removeAttribute("readonly");
-  var inputsLabel = document.querySelector("[for=".concat(item.id, "]"));
-  item.addEventListener("input", function (e) {
-    moveItputsLable(e.target, inputsLabel);
+    // item.addEventListener("input", ({ target }) => {
+    //   if (target.value.length < 1) {
+    //     inputsLabel.classList.remove("active");
+    //   } else {
+    //     inputsLabel.classList.add("active");
+    //   }
+    // });
   });
-});
-var allOrderFieldsTextArea = document.querySelectorAll(".form__delivery-checkbox textarea");
-allOrderFieldsTextArea.forEach(function (item) {
-  var inputsLabel = document.querySelector("[for=".concat(item.id, "]"));
-  item.addEventListener("input", function (e) {
-    moveItputsLable(e.target, inputsLabel);
+  var allOrderFieldsInputs = document.querySelectorAll(".validation_input");
+  allOrderFieldsInputs.forEach(function (item) {
+    item.removeAttribute("readonly");
+    var inputsLabel = document.querySelector("[for=".concat(item.id, "]"));
+    item.addEventListener("input", function (e) {
+      moveItputsLable(e.target, inputsLabel);
+    });
   });
-});
+  var allOrderFieldsTextArea = document.querySelectorAll(".form__delivery-checkbox textarea");
+  allOrderFieldsTextArea.forEach(function (item) {
+    var inputsLabel = document.querySelector("[for=".concat(item.id, "]"));
+    item.addEventListener("input", function (e) {
+      moveItputsLable(e.target, inputsLabel);
+    });
+  });
+}
 
 //Слухач для відстеженя способу доставки
 if (orderForm) {
@@ -29599,13 +29601,15 @@ function createFormData() {
   };
   return formData;
 }
-//Відправка замовлення
-var submitBtn = document.querySelector(".summary__confirm-btn");
-submitBtn.addEventListener("click", function () {
-  var data = createFormData();
-  console.log("send Order - ", data);
-  Object(_api_order__WEBPACK_IMPORTED_MODULE_1__["sendOrder"])(data);
-});
+if (orderForm) {
+  //Відправка замовлення
+  var submitBtn = document.querySelector(".summary__confirm-btn");
+  submitBtn.addEventListener("click", function () {
+    var data = createFormData();
+    console.log("send Order - ", data);
+    // sendOrder(data);
+  });
+}
 
 // render select items, отримання міст та відділень та їх додаванно до списку
 var renderSelectItem = function renderSelectItem(_ref) {
