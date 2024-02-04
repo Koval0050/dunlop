@@ -15627,40 +15627,41 @@ cart.addEventListener("click", /*#__PURE__*/function () {
     return _ref8.apply(this, arguments);
   };
 }());
-cart.addEventListener("input", /*#__PURE__*/function () {
+cart.addEventListener("change", /*#__PURE__*/function () {
   var _ref10 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(_ref9) {
-    var target, cartItem, cartItemId, quantity, counterValue;
+    var target, cartItem, cartItemId, quantity, counterInput, counterValue;
     return _regeneratorRuntime().wrap(function _callee4$(_context4) {
       while (1) switch (_context4.prev = _context4.next) {
         case 0:
           target = _ref9.target;
           cartItem = target.closest(".cart__item");
           if (!(target.className === "counter__value" && cartItem)) {
-            _context4.next = 13;
+            _context4.next = 14;
             break;
           }
           cartItemId = cartItem.dataset.id;
           quantity = Number(cartItem.dataset.quantity);
-          counterValue = Object(_module_shop_scripts_basket_action__WEBPACK_IMPORTED_MODULE_0__["input_basket"])(target);
+          counterInput = cartItem.querySelector(".counter__value");
+          counterValue = Object(_module_shop_scripts_basket_action__WEBPACK_IMPORTED_MODULE_0__["input_basket"])(counterInput);
           if (!(counterValue > quantity)) {
-            _context4.next = 10;
+            _context4.next = 11;
             break;
           }
-          cartItem.querySelector(".counter__value").value = quantity;
-          _context4.next = 10;
+          counterInput.value = quantity;
+          _context4.next = 11;
           return Object(_api_cart__WEBPACK_IMPORTED_MODULE_1__["updateCartItem"])(cartItemId, {
             quantity: quantity
           });
-        case 10:
+        case 11:
           if (!(counterValue < quantity)) {
-            _context4.next = 13;
+            _context4.next = 14;
             break;
           }
-          _context4.next = 13;
+          _context4.next = 14;
           return Object(_api_cart__WEBPACK_IMPORTED_MODULE_1__["updateCartItem"])(cartItemId, {
             quantity: counterValue
           });
-        case 13:
+        case 14:
         case "end":
           return _context4.stop();
       }
@@ -16375,23 +16376,22 @@ function plus(wrapper, input_name, this_click) {
   input.value = value + 1;
   return Number(input.value);
 }
-function input_basket(input_name) {
-  var input = input_name;
+function input_basket(input) {
   var value = Number(input.value);
-  if (value <= 0) {
+  if (isNaN(value) || value <= 0) {
     input.value = 1;
   }
   return Number(input.value);
 }
 function delete_item(this_click, wrapper) {
   var wrap = this_click.closest(wrapper);
-  wrap.style.position = 'relative';
-  wrap.style.transition = 'all .2s';
-  wrap.style.maxHeight = '1000px';
-  wrap.style.maxHeight = '0px';
-  wrap.style.transform = 'scale(0)';
+  wrap.style.position = "relative";
+  wrap.style.transition = "all .2s";
+  wrap.style.maxHeight = "1000px";
+  wrap.style.maxHeight = "0px";
+  wrap.style.transform = "scale(0)";
   setTimeout(function () {
-    wrap.style.position = 'absolute';
+    wrap.style.position = "absolute";
   }, 200);
   setTimeout(function () {
     wrap.remove();
@@ -16948,45 +16948,34 @@ if (orderForm) {
   Object(_api_order__WEBPACK_IMPORTED_MODULE_1__["getCities"])("а");
 }
 
-// Перенесення лейблу при введені тексту
-function moveItputsLable(target, inputsLabel) {
+//Перенесення лейблу при введені тексту
+function moveInputsLabel(target, inputsLabel) {
   if (target.value.length < 1) {
     inputsLabel.classList.remove("active");
   } else {
     inputsLabel.classList.add("active");
   }
 }
+function addInputListeners(inputs) {
+  inputs.forEach(function (item) {
+    var inputsLabel = document.querySelector("[for=".concat(item.id, "]"));
+
+    // Перевірка наявності атрибуту readonly перед його видаленням
+    if (item.hasAttribute("readonly")) {
+      item.removeAttribute("readonly");
+    }
+    item.addEventListener("input", function (e) {
+      moveInputsLabel(e.target, inputsLabel);
+    });
+  });
+}
 if (orderForm) {
   var allContactFieldsInputs = document.querySelectorAll(".form__field-input");
-  allContactFieldsInputs.forEach(function (item) {
-    var inputsLabel = document.querySelector("[for=".concat(item.id, "]"));
-    item.addEventListener("input", function (e) {
-      moveItputsLable(e.target, inputsLabel);
-    });
-
-    // item.addEventListener("input", ({ target }) => {
-    //   if (target.value.length < 1) {
-    //     inputsLabel.classList.remove("active");
-    //   } else {
-    //     inputsLabel.classList.add("active");
-    //   }
-    // });
-  });
+  addInputListeners(allContactFieldsInputs);
   var allOrderFieldsInputs = document.querySelectorAll(".validation_input");
-  allOrderFieldsInputs.forEach(function (item) {
-    item.removeAttribute("readonly");
-    var inputsLabel = document.querySelector("[for=".concat(item.id, "]"));
-    item.addEventListener("input", function (e) {
-      moveItputsLable(e.target, inputsLabel);
-    });
-  });
+  addInputListeners(allOrderFieldsInputs);
   var allOrderFieldsTextArea = document.querySelectorAll(".form__delivery-checkbox textarea");
-  allOrderFieldsTextArea.forEach(function (item) {
-    var inputsLabel = document.querySelector("[for=".concat(item.id, "]"));
-    item.addEventListener("input", function (e) {
-      moveItputsLable(e.target, inputsLabel);
-    });
-  });
+  addInputListeners(allOrderFieldsTextArea);
 }
 
 //Слухач для відстеженя способу доставки
@@ -17018,6 +17007,9 @@ if (orderForm) {
 
 //формуємо дані для замовлення
 function createFormData() {
+  if (typeof payment_type !== "string") {
+    payment_type = payment_type.id;
+  }
   var formData = {
     name: document.getElementById("firstName").value,
     surname: document.getElementById("lastName").value,
@@ -17032,12 +17024,18 @@ function createFormData() {
   return formData;
 }
 if (orderForm) {
-  //Відправка замовлення
+  // Відправка замовлення
   var submitBtn = document.querySelector(".summary__confirm-btn");
   submitBtn.addEventListener("click", function () {
-    var data = createFormData();
-    console.log("send Order - ", data);
-    Object(_api_order__WEBPACK_IMPORTED_MODULE_1__["sendOrder"])(data);
+    // Перевірка чи є помилки валідації перед відправкою замовлення
+    var error = document.querySelector(".validation_error");
+    if (error) {
+      console.log("Будь ласка, виправте помилки валідації перед відправкою замовлення.");
+      return;
+    }
+
+    // Відправка замовлення
+    Object(_api_order__WEBPACK_IMPORTED_MODULE_1__["sendOrder"])(createFormData());
   });
 }
 

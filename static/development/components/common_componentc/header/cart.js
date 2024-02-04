@@ -145,17 +145,18 @@ cart.addEventListener("click", async ({ target }) => {
   }
 });
 
-cart.addEventListener("input", async ({ target }) => {
+cart.addEventListener("change", async ({ target }) => {
   const cartItem = target.closest(".cart__item");
 
   if (target.className === "counter__value" && cartItem) {
     const cartItemId = cartItem.dataset.id;
     const quantity = Number(cartItem.dataset.quantity);
 
-    const counterValue = input_basket(target);
+    const counterInput = cartItem.querySelector(".counter__value");
+    const counterValue = input_basket(counterInput);
 
     if (counterValue > quantity) {
-      cartItem.querySelector(".counter__value").value = quantity;
+      counterInput.value = quantity;
       await updateCartItem(cartItemId, { quantity });
     }
 
