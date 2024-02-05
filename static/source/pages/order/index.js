@@ -17007,6 +17007,7 @@ if (orderForm) {
 
 //формуємо дані для замовлення
 function createFormData() {
+  //Усуває баг з відправкою обєкта
   if (typeof payment_type !== "string") {
     payment_type = payment_type.id;
   }
@@ -17023,19 +17024,37 @@ function createFormData() {
   };
   return formData;
 }
+function validateForm() {
+  var isErorr = false;
+  //Перевіряємо чи поля contacts пройшли валідацію
+  var contactsFields = document.querySelector(".form__part-contacts");
+  if (contactsFields.querySelector(".validation_error")) {
+    isErorr = true;
+    return isErorr;
+  }
+  var deliverytFields = document.querySelector(".form__part-delivery");
+  var deliveryOption = deliverytFields.querySelector(".form__delivery-checkbox.active");
+  if (deliveryOption.querySelector(".validation_error")) {
+    isErorr = true;
+    return isErorr;
+  }
+  var paymentFields = document.querySelector(".form__part-payment");
+  if (paymentFields.querySelector(".validation_error")) {
+    isErorr = true;
+    return isErorr;
+  }
+  return isErorr;
+}
 if (orderForm) {
   // Відправка замовлення
   var submitBtn = document.querySelector(".summary__confirm-btn");
   submitBtn.addEventListener("click", function () {
-    // Перевірка чи є помилки валідації перед відправкою замовлення
-    var error = document.querySelector(".validation_error");
-    if (error) {
-      console.log("Будь ласка, виправте помилки валідації перед відправкою замовлення.");
-      return;
+    var data = createFormData();
+    var isErorr = validateForm();
+    if (!isErorr) {
+      console.log("send order - ", data);
+      Object(_api_order__WEBPACK_IMPORTED_MODULE_1__["sendOrder"])(data);
     }
-
-    // Відправка замовлення
-    Object(_api_order__WEBPACK_IMPORTED_MODULE_1__["sendOrder"])(createFormData());
   });
 }
 

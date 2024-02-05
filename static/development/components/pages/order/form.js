@@ -85,6 +85,7 @@ if (orderForm) {
 
 //формуємо дані для замовлення
 function createFormData() {
+  //Усуває баг з відправкою обєкта
   if (typeof payment_type !== "string") {
     payment_type = payment_type.id;
   }
@@ -103,21 +104,44 @@ function createFormData() {
   return formData;
 }
 
+function validateForm() {
+  let isErorr = false;
+  //Перевіряємо чи поля contacts пройшли валідацію
+  const contactsFields = document.querySelector(".form__part-contacts");
+  if (contactsFields.querySelector(".validation_error")) {
+    isErorr = true;
+    return isErorr;
+  }
+
+  const deliverytFields = document.querySelector(".form__part-delivery");
+  const deliveryOption = deliverytFields.querySelector(
+    ".form__delivery-checkbox.active"
+  );
+  if (deliveryOption.querySelector(".validation_error")) {
+    isErorr = true;
+    return isErorr;
+  }
+
+  const paymentFields = document.querySelector(".form__part-payment");
+  if (paymentFields.querySelector(".validation_error")) {
+    isErorr = true;
+    return isErorr;
+  }
+
+  return isErorr;
+}
+
 if (orderForm) {
   // Відправка замовлення
   const submitBtn = document.querySelector(".summary__confirm-btn");
   submitBtn.addEventListener("click", () => {
-    // Перевірка чи є помилки валідації перед відправкою замовлення
-    const error = document.querySelector(".validation_error");
-    if (error) {
-      console.log(
-        "Будь ласка, виправте помилки валідації перед відправкою замовлення."
-      );
-      return;
-    }
+    const data = createFormData();
+    const isErorr = validateForm();
 
-    // Відправка замовлення
-    sendOrder(createFormData());
+    if (!isErorr) {
+      console.log("send order - ", data);
+      sendOrder(data);
+    }
   });
 }
 
