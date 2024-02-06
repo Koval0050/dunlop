@@ -29546,18 +29546,31 @@ if (orderForm) {
   addInputListeners(allOrderFieldsTextArea);
 }
 
-//Слухач для відстеженя способу доставки
+// Слухач для відстеження способу доставки
 if (orderForm) {
   var allDeliveryCheckbox = document.querySelectorAll(".form__delivery-checkbox input[type='radio']");
   allDeliveryCheckbox.forEach(function (checkbox) {
     checkbox.addEventListener("click", function () {
       // Знімаємо клас "active" з усіх елементів
       allDeliveryCheckbox.forEach(function (el) {
+        var inputField = el.closest(".form__delivery-checkbox").querySelector("input[type='text'], textarea");
+        // Перевіряємо, чи поле введення існує і чи не є воно поточним полем введення
+        if (inputField && el !== checkbox) {
+          inputField.classList.remove("validation_input");
+        }
         el.closest(".form__delivery-checkbox").classList.remove("active");
       });
 
       // Додаємо клас "active" тільки для вибраного елемента
       this.closest(".form__delivery-checkbox").classList.add("active");
+
+      // Отримуємо поле введення залежно від обраного способу доставки
+      var inputField = this.closest(".form__delivery-checkbox").querySelector("input[type='text'], textarea");
+
+      // Додаємо клас "validation_input" до поля введення, якщо воно є
+      if (inputField) {
+        inputField.classList.add("validation_input");
+      }
     });
   });
 }
@@ -29593,33 +29606,23 @@ function createFormData() {
   return formData;
 }
 function validateForm() {
-  var isErorr = false;
-  //Перевіряємо чи поля contacts пройшли валідацію
-  var contactsFields = document.querySelector(".form__part-contacts");
-  if (contactsFields.querySelector(".validation_error")) {
-    isErorr = true;
-    return isErorr;
+  var isError = checkValidation(".form__part-contacts") || checkValidation(".form__part-delivery .form__delivery-checkbox") || checkValidation(".form__part-payment");
+  return isError;
+}
+function checkValidation(selector) {
+  var field = document.querySelector(selector);
+  if (field && field.querySelector(".validation_error")) {
+    return true;
   }
-  var deliverytFields = document.querySelector(".form__part-delivery");
-  var deliveryOption = deliverytFields.querySelector(".form__delivery-checkbox.active");
-  if (deliveryOption.querySelector(".validation_error")) {
-    isErorr = true;
-    return isErorr;
-  }
-  var paymentFields = document.querySelector(".form__part-payment");
-  if (paymentFields.querySelector(".validation_error")) {
-    isErorr = true;
-    return isErorr;
-  }
-  return isErorr;
+  return false;
 }
 if (orderForm) {
   // Відправка замовлення
   var submitBtn = document.querySelector(".summary__confirm-btn");
   submitBtn.addEventListener("click", function () {
     var data = createFormData();
-    var isErorr = validateForm();
-    if (!isErorr) {
+    var isError = validateForm();
+    if (!isError) {
       console.log("send order - ", data);
       Object(_api_order__WEBPACK_IMPORTED_MODULE_1__["sendOrder"])(data);
     }

@@ -49,7 +49,7 @@ if (orderForm) {
   addInputListeners(allOrderFieldsTextArea);
 }
 
-//Слухач для відстеженя способу доставки
+// Слухач для відстеження способу доставки
 if (orderForm) {
   const allDeliveryCheckbox = document.querySelectorAll(
     ".form__delivery-checkbox input[type='radio']"
@@ -59,11 +59,28 @@ if (orderForm) {
     checkbox.addEventListener("click", function () {
       // Знімаємо клас "active" з усіх елементів
       allDeliveryCheckbox.forEach((el) => {
+        const inputField = el
+          .closest(".form__delivery-checkbox")
+          .querySelector("input[type='text'], textarea");
+        // Перевіряємо, чи поле введення існує і чи не є воно поточним полем введення
+        if (inputField && el !== checkbox) {
+          inputField.classList.remove("validation_input");
+        }
         el.closest(".form__delivery-checkbox").classList.remove("active");
       });
 
       // Додаємо клас "active" тільки для вибраного елемента
       this.closest(".form__delivery-checkbox").classList.add("active");
+
+      // Отримуємо поле введення залежно від обраного способу доставки
+      const inputField = this.closest(".form__delivery-checkbox").querySelector(
+        "input[type='text'], textarea"
+      );
+
+      // Додаємо клас "validation_input" до поля введення, якщо воно є
+      if (inputField) {
+        inputField.classList.add("validation_input");
+      }
     });
   });
 }
@@ -105,30 +122,19 @@ function createFormData() {
 }
 
 function validateForm() {
-  let isErorr = false;
-  //Перевіряємо чи поля contacts пройшли валідацію
-  const contactsFields = document.querySelector(".form__part-contacts");
-  if (contactsFields.querySelector(".validation_error")) {
-    isErorr = true;
-    return isErorr;
-  }
+  const isError =
+    checkValidation(".form__part-contacts") ||
+    checkValidation(".form__part-delivery .form__delivery-checkbox") ||
+    checkValidation(".form__part-payment");
+  return isError;
+}
 
-  const deliverytFields = document.querySelector(".form__part-delivery");
-  const deliveryOption = deliverytFields.querySelector(
-    ".form__delivery-checkbox.active"
-  );
-  if (deliveryOption.querySelector(".validation_error")) {
-    isErorr = true;
-    return isErorr;
+function checkValidation(selector) {
+  const field = document.querySelector(selector);
+  if (field && field.querySelector(".validation_error")) {
+    return true;
   }
-
-  const paymentFields = document.querySelector(".form__part-payment");
-  if (paymentFields.querySelector(".validation_error")) {
-    isErorr = true;
-    return isErorr;
-  }
-
-  return isErorr;
+  return false;
 }
 
 if (orderForm) {
@@ -136,9 +142,9 @@ if (orderForm) {
   const submitBtn = document.querySelector(".summary__confirm-btn");
   submitBtn.addEventListener("click", () => {
     const data = createFormData();
-    const isErorr = validateForm();
+    const isError = validateForm();
 
-    if (!isErorr) {
+    if (!isError) {
       console.log("send order - ", data);
       sendOrder(data);
     }
