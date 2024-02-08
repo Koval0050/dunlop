@@ -10,3 +10,13 @@ python manage.py runserver
 <!-- встановлення venv -->
 
 python -m venv venv
+
+python manage.py createsuperuser
+
+<!-- pass: -->
+
+test
+
+<!-- login: -->
+
+test
