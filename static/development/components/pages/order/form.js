@@ -24,7 +24,6 @@ function addInputListeners(inputs) {
   inputs.forEach((item) => {
     const inputsLabel = document.querySelector(`[for=${item.id}]`);
 
-    // Перевірка наявності атрибуту readonly перед його видаленням
     if (item.hasAttribute("readonly")) {
       item.removeAttribute("readonly");
     }
@@ -32,6 +31,7 @@ function addInputListeners(inputs) {
     item.addEventListener("input", (e) => {
       moveInputsLabel(e.target, inputsLabel);
     });
+    item.addEventListener("blur", validateOnChange);
   });
 }
 
@@ -65,6 +65,7 @@ if (orderForm) {
         // Перевіряємо, чи поле введення існує і чи не є воно поточним полем введення
         if (inputField && el !== checkbox) {
           inputField.classList.remove("validation_input");
+          inputField.removeEventListener("blur", validateOnChange);
         }
         el.closest(".form__delivery-checkbox").classList.remove("active");
       });
@@ -80,6 +81,8 @@ if (orderForm) {
       // Додаємо клас "validation_input" до поля введення, якщо воно є
       if (inputField) {
         inputField.classList.add("validation_input");
+
+        inputField.addEventListener("blur", validateOnChange);
       }
     });
   });
@@ -121,11 +124,19 @@ function createFormData() {
   return formData;
 }
 
-function validateForm() {
+function validateOnChange() {
   const isError =
     checkValidation(".form__part-contacts") ||
-    checkValidation(".form__part-delivery .form__delivery-checkbox") ||
+    checkValidation(".form__delivery-checkbox.active") ||
     checkValidation(".form__part-payment");
+
+  console.log("check validation");
+  const submitBtn = document.querySelector(".summary__confirm-btn");
+  if (!isError) {
+    submitBtn.removeAttribute("disabled");
+  } else {
+    submitBtn.setAttribute("disabled", true);
+  }
   return isError;
 }
 
@@ -142,11 +153,13 @@ if (orderForm) {
   const submitBtn = document.querySelector(".summary__confirm-btn");
   submitBtn.addEventListener("click", () => {
     const data = createFormData();
-    const isError = validateForm();
+    const isError = validateOnChange();
 
     if (!isError) {
       console.log("send order - ", data);
       sendOrder(data);
+    } else {
+      submitBtn.setAttribute("disabled", true);
     }
   });
 }

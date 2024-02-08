@@ -29439,14 +29439,13 @@ function moveInputsLabel(target, inputsLabel) {
 function addInputListeners(inputs) {
   inputs.forEach(function (item) {
     var inputsLabel = document.querySelector("[for=".concat(item.id, "]"));
-
-    // Перевірка наявності атрибуту readonly перед його видаленням
     if (item.hasAttribute("readonly")) {
       item.removeAttribute("readonly");
     }
     item.addEventListener("input", function (e) {
       moveInputsLabel(e.target, inputsLabel);
     });
+    item.addEventListener("blur", validateOnChange);
   });
 }
 if (orderForm) {
@@ -29469,6 +29468,7 @@ if (orderForm) {
         // Перевіряємо, чи поле введення існує і чи не є воно поточним полем введення
         if (inputField && el !== checkbox) {
           inputField.classList.remove("validation_input");
+          inputField.removeEventListener("blur", validateOnChange);
         }
         el.closest(".form__delivery-checkbox").classList.remove("active");
       });
@@ -29482,6 +29482,7 @@ if (orderForm) {
       // Додаємо клас "validation_input" до поля введення, якщо воно є
       if (inputField) {
         inputField.classList.add("validation_input");
+        inputField.addEventListener("blur", validateOnChange);
       }
     });
   });
@@ -29517,8 +29518,15 @@ function createFormData() {
   };
   return formData;
 }
-function validateForm() {
-  var isError = checkValidation(".form__part-contacts") || checkValidation(".form__part-delivery .form__delivery-checkbox") || checkValidation(".form__part-payment");
+function validateOnChange() {
+  var isError = checkValidation(".form__part-contacts") || checkValidation(".form__delivery-checkbox.active") || checkValidation(".form__part-payment");
+  console.log("check validation");
+  var submitBtn = document.querySelector(".summary__confirm-btn");
+  if (!isError) {
+    submitBtn.removeAttribute("disabled");
+  } else {
+    submitBtn.setAttribute("disabled", true);
+  }
   return isError;
 }
 function checkValidation(selector) {
@@ -29533,10 +29541,12 @@ if (orderForm) {
   var submitBtn = document.querySelector(".summary__confirm-btn");
   submitBtn.addEventListener("click", function () {
     var data = createFormData();
-    var isError = validateForm();
+    var isError = validateOnChange();
     if (!isError) {
       console.log("send order - ", data);
       Object(_api_order__WEBPACK_IMPORTED_MODULE_1__["sendOrder"])(data);
+    } else {
+      submitBtn.setAttribute("disabled", true);
     }
   });
 }
